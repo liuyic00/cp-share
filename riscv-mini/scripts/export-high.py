@@ -41,10 +41,11 @@ def main():
         classes = build / 'classes'
         classes.mkdir(exist_ok=True)
         run([java, '-cp', cp['scalaCompilerClasspath'], 'scala.tools.nsc.Main',
-             '-classpath', cp['runClasspath'], '-d', classes, HERE / 'ExportHigh.scala'])
+             '-classpath', cp['runClasspath'], '-d', classes, HERE / 'ExportHigh.scala', HERE / 'MemToRegsHigh.scala'])
         run([java, '-cp', cp['runClasspath'] + os.pathsep + str(classes),
              'ExportRiscvMiniHigh', build], cwd=source)
         shutil.copyfile(build / 'CoreSoc.hi.fir', output / 'CoreSoc.hi.fir')
+        shutil.copyfile(build / 'CoreSoc.nomem.hi.fir', output / 'CoreSoc.nomem.hi.fir')
         # Preserve compiler metadata alongside the standalone wired circuit.
         annotations = json.loads((build / 'CoreSoc.anno.json').read_text())
         annotations = [a for a in annotations if a['class'] not in (
@@ -62,6 +63,14 @@ def main():
         low = (recheck / 'CoreSoc.lo.fir').read_bytes()
         if args.compare_low and low != args.compare_low.read_bytes():
             raise RuntimeError('High-to-low output differs from the supplied previous Low FIRRTL')
+        nomem = (output / 'CoreSoc.nomem.hi.fir').read_text()
+        assert not re.search(r'^\s*(?:mem|cmem|smem)\s+[^\s:]+\s*:', nomem, re.M)
+        assert re.findall(r'^  module (\w+)', nomem, re.M) == re.findall(r'^  module (\w+)', circuit, re.M)
+        for kind, count in counts.items():
+            assert len(re.findall(r'^\s*' + kind + r'\(', nomem, re.M)) == count
+        run([java, '-cp', cp['runClasspath'], 'firrtl.stage.FirrtlMain',
+             '-i', output / 'CoreSoc.nomem.hi.fir', '-faf', output / 'CoreSoc.anno.json',
+             '-X', 'low', '--target-dir', build / 'nomem-recheck'])
         report = {
             'source': {Path(k).name: v['commit'] for k, v in before.items()},
             'entry': 'new mini.CoreSoc(new mini.Core(mini.MiniConfig().core))',
@@ -71,7 +80,7 @@ def main():
             'compared_previous_low': args.compare_low is not None,
             'compiler': 'Chisel 3.6.0 / FIRRTL 1.6.0, -X high',
             'sha256': {f.name: hashlib.sha256(f.read_bytes()).hexdigest()
-                       for f in (output / 'CoreSoc.hi.fir', output / 'CoreSoc.anno.json')},
+                       for f in (output / 'CoreSoc.hi.fir', output / 'CoreSoc.anno.json', output / 'CoreSoc.nomem.hi.fir')},
         }
         (output / 'manifest.json').write_text(json.dumps(report, indent=2) + '\n')
     finally:

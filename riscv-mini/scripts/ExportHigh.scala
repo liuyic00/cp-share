@@ -15,4 +15,6 @@ object ExportRiscvMiniHigh extends App {
   val circuit = annotations.collectFirst { case FirrtlCircuitAnnotation(c) => c }.get
   require(Set("CoreSoc", "CheckerWithResult", "RiscvCore").subsetOf(
     circuit.modules.map(_.name).toSet), "Missing checker/reference hierarchy")
+  java.nio.file.Files.writeString(java.nio.file.Paths.get(args(0), "CoreSoc.nomem.hi.fir"),
+    MemToRegsHigh.convert(circuit).serialize)
 }

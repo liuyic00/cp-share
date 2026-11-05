@@ -29,11 +29,17 @@ def check(task, build, sources):
     parts = sorted((root / 'verification/lean/Generated' / top).glob('Part*.lean'))
     if ''.join(body(p.read_text()) for p in parts) != body(raw):
         raise SystemExit(f'{task}: generated partitions differ from monolithic export')
-    for stage in ['hi', 'lo', 'flat.lo', 'prepared.lo']:
+    for stage in ['hi', 'nomem.hi', 'lo', 'flat.lo', 'prepared.lo']:
         text = (root / 'artifacts/firrtl' / f'{top}.{stage}.fir').read_text()
         for kind, count in report['properties'].items():
             if len(re.findall(r'^\s*' + kind + r'\(', text, re.M)) != count:
                 raise SystemExit(f'{task}: {stage} {kind} count mismatch')
+    nomem = (root / 'artifacts/firrtl' / f'{top}.nomem.hi.fir').read_text()
+    if re.search(r'^\s*(?:mem|cmem|smem)\s+[^\s:]+\s*:', nomem, re.M):
+        raise SystemExit(f'{task}: memory remains in nomem High FIRRTL')
+    for memory in ['imem', 'dmem']:
+        if len(re.findall(r'^\s*reg ' + memory + r'_word_\d+ : UInt<32>', nomem, re.M)) != 16:
+            raise SystemExit(f'{task}: wrong {memory} register count in nomem High FIRRTL')
     for kind, count in report['properties'].items():
         text = (root / 'artifacts/mlir' / f'{top}.final.mlir').read_text()
         if len(re.findall(r'verif.clocked_' + kind + r'\b', text)) != count:

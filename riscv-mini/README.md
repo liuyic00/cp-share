@@ -70,6 +70,7 @@ git diff -- artifacts verification/lean/Generated manifest.json
 |---|---|
 | `artifacts/firrtl/CoreSoc.chirrtl.fir` | 原始 Chisel elaboration（CHIRRTL，尚未降到 High） |
 | `artifacts/firrtl/CoreSoc.hi.fir` | 解析 wiring 后的分层 High FIRRTL |
+| `artifacts/firrtl/CoreSoc.nomem.hi.fir` | 保留层次的无 mem High FIRRTL，imem/dmem 各展开为 16 个 32 位 reg |
 | `artifacts/firrtl/CoreSoc.lo.fir` | 分层 Low FIRRTL |
 | `artifacts/firrtl/CoreSoc.flat.lo.fir` | 展平后的 Low FIRRTL |
 | `artifacts/firrtl/CoreSoc.prepared.lo.fir`、`.fir2.lo.fir` | 任意值显式输入、小内存适配、版本头适配 |
@@ -77,6 +78,11 @@ git diff -- artifacts verification/lean/Generated manifest.json
 | `artifacts/export/CoreSoc.lean` | 单文件 Lean 导出 |
 | `verification/lean/Generated/` | 按定义边界拆分的相同模型，供证明 import |
 | `verification/lean/Proofs/` | 证明源码 |
+
+`CoreSoc.nomem.hi.fir` 由 `scripts/MemToRegsHigh.scala` 从 High 电路转换，
+保留模块、端口、验证语句与任意初始内存内容；异步读用 mux，禁用读用 validif 保留未定义语义，
+同步写按 enable/mask 更新。`export-high.py` 会检查无 memory 声明并实际降到 Low；
+`regenerate.py` 会同步更新此产物。现有 Lean 证明仍使用原先的 Low 适配链。
 
 文件名中 `.hi.fir` 表示 High，`.lo.fir` 表示 Low；`.chirrtl.fir` 是原始 CHIRRTL。
 `.hi.anno.json` 和 `.lo.anno.json` 分别是对应阶段的元数据。

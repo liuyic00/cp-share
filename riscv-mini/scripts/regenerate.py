@@ -60,6 +60,7 @@ def main():
                                          ('fir2.fir','fir2.lo.fir')]:
         shutil.copyfile(build/'low'/f'{top}.{source_suffix}',ROOT/'artifacts/firrtl'/f'{top}.{target_suffix}')
     shutil.copyfile(build/'high'/f'{top}.hi.fir',ROOT/'artifacts/firrtl'/f'{top}.hi.fir')
+    shutil.copyfile(build/'high'/f'{top}.nomem.hi.fir',ROOT/'artifacts/firrtl'/f'{top}.nomem.hi.fir')
     for suffix in ['hw.mlir','final.mlir']:
         shutil.copyfile(build/'low'/f'{top}.{suffix}',ROOT/'artifacts/mlir'/f'{top}.{suffix}')
     shutil.copyfile(build/'low'/f'{top}.lean',ROOT/'artifacts/export'/f'{top}.lean')
