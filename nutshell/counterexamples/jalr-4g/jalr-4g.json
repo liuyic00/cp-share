@@ -1,0 +1,288 @@
+{
+  "status": "reproduced finite-prefix candidate; final valuation cross-checked on all generated expressions by Lean runtime; kernel reachability and infinite environment extension not proved",
+  "reproduce": [
+    "python3",
+    "scripts/search-traces.py",
+    "--cycles",
+    "80",
+    "--program",
+    "0x001000b7,0x00c09093,0x00008067",
+    "--output",
+    "build/jalr-4g-trace.json"
+  ],
+  "initial_state": "all registers zero",
+  "unspecified_inputs": "zero",
+  "reset_cycles": 2,
+  "program": [
+    {
+      "word": "0x001000b7",
+      "instruction": "lui x1, 0x100"
+    },
+    {
+      "word": "0x00c09093",
+      "instruction": "slli x1, x1, 12"
+    },
+    {
+      "word": "0x00008067",
+      "instruction": "jalr x0, x1, 0"
+    }
+  ],
+  "target": "0x100000000",
+  "unmapped_instruction": "NOP (0x13)",
+  "failure_cycle": 27,
+  "failed_assertions": [
+    43,
+    45,
+    46,
+    47
+  ],
+  "all_observed_assumptions_pass": true,
+  "exclusions_added": true,
+  "inputs": [
+    {
+      "nreset": 1,
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nreset": 1,
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fimem_5Fmem_5Fresp_5Fvalid": 1,
+      "nio_5Fimem_5Fmem_5Fresp_5Fbits_5Fcmd": 6,
+      "nio_5Fimem_5Fmem_5Fresp_5Fbits_5Frdata": 54202156564086967,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fimem_5Fmem_5Fresp_5Fvalid": 1,
+      "nio_5Fimem_5Fmem_5Fresp_5Fbits_5Fcmd": 6,
+      "nio_5Fimem_5Fmem_5Fresp_5Fbits_5Frdata": 54202156564086967,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fimem_5Fmem_5Fresp_5Fvalid": 1,
+      "nio_5Fimem_5Fmem_5Fresp_5Fbits_5Fcmd": 6,
+      "nio_5Fimem_5Fmem_5Fresp_5Fbits_5Frdata": 81604411495,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fimem_5Fmem_5Fresp_5Fvalid": 1,
+      "nio_5Fimem_5Fmem_5Fresp_5Fbits_5Fcmd": 6,
+      "nio_5Fimem_5Fmem_5Fresp_5Fbits_5Frdata": 81604411495,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fimem_5Fmem_5Fresp_5Fvalid": 1,
+      "nio_5Fimem_5Fmem_5Fresp_5Fbits_5Fcmd": 6,
+      "nio_5Fimem_5Fmem_5Fresp_5Fbits_5Frdata": 81604378643,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fimem_5Fmem_5Fresp_5Fvalid": 1,
+      "nio_5Fimem_5Fmem_5Fresp_5Fbits_5Fcmd": 6,
+      "nio_5Fimem_5Fmem_5Fresp_5Fbits_5Frdata": 81604378643,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    },
+    {
+      "nio_5Fimem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fdmem_5Fmem_5Freq_5Fready": 1,
+      "nio_5Fmmio_5Freq_5Fready": 1
+    }
+  ],
+  "input_encoding": "Per-cycle sparse assignments; every omitted input is zero.",
+  "failed_check_nodes": {
+    "43": {
+      "gate": "v31743",
+      "gate_value": 1,
+      "predicate": "v31740",
+      "predicate_value": 0
+    },
+    "45": {
+      "gate": "v31766",
+      "gate_value": 1,
+      "predicate": "v31764",
+      "predicate_value": 0
+    },
+    "46": {
+      "gate": "v31777",
+      "gate_value": 1,
+      "predicate": "v31775",
+      "predicate_value": 0
+    },
+    "47": {
+      "gate": "v31789",
+      "gate_value": 1,
+      "predicate": "v31787",
+      "predicate_value": 0
+    }
+  },
+  "generated_sha256": {
+    "lean/Generated/NutCore/Part000.lean": "010f9a8d41c12d4731c6f76ee05e3319fd1b96500eee2962e6f15b33f6ad749b",
+    "lean/Generated/NutCore/Part001.lean": "4e69ce8499ab152f5fc9ffaeb9baa60adb3067f650f729481f562a17ea6c107f",
+    "lean/Generated/NutCore/Part002.lean": "3ca1bd78eff73925c3993ae074117a137ce41c045ae089ff7357e0db90d64fe6",
+    "lean/Generated/NutCore/Part003.lean": "111cc179825e5311679bd49842c6582318420dcfae6f2cc414843eb590e839c6",
+    "lean/Generated/NutCore/Part004.lean": "0dfb01ab5be76ed97fc6ca828ddc7e4f73fd09be47f48e5870fee4f2ac791c2c",
+    "lean/Generated/NutCore/Part005.lean": "e0e8cbcc63b985c1deb68ec2fd6945b3d54c991e73718e50d031b41ad7d19471",
+    "lean/Generated/NutCore/Part006.lean": "8ea679ecc850fc1e180b05de7dc0c3935932c3e988e6bfc6a023fe625c85ecc3",
+    "lean/Generated/NutCore/Part007.lean": "3099f0f402ed5ecbfac59e7a73cd2cc46d52bddf0ab419d914f7c933188541fd",
+    "lean/Generated/NutCore/Part008.lean": "c27fb847ba7a61b511c532b8e3d39d243f21380d9fdf1f4dc673949b8fe9870b",
+    "lean/Generated/NutCore/Part009.lean": "39d12086bc60e800c00eb14742b9992b881cd294786c38a2facc27c9d6cf7860",
+    "lean/Generated/NutCore/Part010.lean": "766c182d2d93f6b9a7a26bfae606da8d69595536c7b132553a7163bf2e9256e3",
+    "lean/Generated/NutCore/Part011.lean": "a56792dca353534f3b5995cb8d5b43b17fc405a7a70ab6a7e6211428717308c3",
+    "lean/Generated/NutCore/Part012.lean": "bc01181fe9ff4c81ccc36d7ef8829bf1b1667093174b9ec93f7b2186d94cf36a",
+    "lean/Generated/NutCore/Part013.lean": "4290626989a992e6ff2d26166aaf203e4211ddc53737ed35bc1e5441a7c50c9c",
+    "lean/Generated/NutCore/Part014.lean": "188a0933c7b2564a4aa0007fd983a4fc16c19047faa0e8c5817a53da725700a3",
+    "lean/Generated/NutCore/Part015.lean": "20cbd32a4a36f046190a3112062411b211ed730289bbfa8e06a514cb66e3f068",
+    "lean/Generated/NutCore/Part016.lean": "e3d9e3fe2bd24ada13e2f3ee451391dc5afbcca7edab0164b3ac4e531c13de02",
+    "lean/Generated/NutCore/Part017.lean": "5bf3b8767e517aea38b101b42ceb2cbb12942a1a4a21ebde71f1f818bf2ec73b",
+    "lean/Generated/NutCore/Part018.lean": "9b2f6517df288a46fb3f5a306701b32c61b34c13e88b4f7651f1bd5fea322b76",
+    "lean/Generated/NutCore/Part019.lean": "7f1f51e3d127143fc08130e353773a6562b3b891c4949f094c7d8a32495fd76c",
+    "lean/Generated/NutCore/Part020.lean": "2e532b82695dc1736b319382303688c41db18a588b38d89d54fc311efe93c225",
+    "lean/Generated/NutCore/Part021.lean": "fdc98f5670ead932de91f07025815f4aee1565515d6395a74467ac0da58036b7",
+    "lean/Generated/NutCore/Part022.lean": "2679978711c3e815aecac96ba9881511f6d34b29b05e4665f446d0806ebb4a4b",
+    "lean/Generated/NutCore/Part023.lean": "97c398872fe0118037037ae8ca43287db65703f888f1883bed3c812779df72ac",
+    "lean/Generated/NutCore/Part024.lean": "ca2ea30dcdcca6d0c58248cc89215fb1bef90ea302517d525bc09ba3904f9cef",
+    "lean/Generated/NutCore/Part025.lean": "924a177d412528f5ed3c7832194fc42784f6e7b8453efbedfe6cbff467333c53",
+    "lean/Generated/NutCore/Part026.lean": "ebbf1bc08b5f20dd4dbec71320be26b809d18405d351bddd03dd9602232807d0",
+    "lean/Generated/NutCore/Part027.lean": "1e2f458f4456815fcd43a48ae41a7e9187e4e6771059fc136b8d9418788e9858",
+    "lean/Generated/NutCore/Part028.lean": "6b803d7c3d42208830ac2f70747e8b0cc37ea368d8a9ff27c060549c3c6c7553",
+    "lean/Generated/NutCore/Part029.lean": "55096d2411a9b8b50040183b25e952a6a0cce803a187c75cd6fcd2a440565988",
+    "lean/Generated/NutCore/Part030.lean": "03cf5275d563004873070d6c7f9c8c225c2882dd534f75b7e5890479cff79ab6",
+    "lean/Generated/NutCore/Part031.lean": "384ce014ee58b4f1e680172473a3350f7821996cdf115303c29162b3f227499c",
+    "lean/Generated/NutCore/Part032.lean": "2209124061f39c25b3665839c5707c7901adf8277aaa9e65b123aa5d9e451165",
+    "lean/Generated/NutCore/Part033.lean": "d29ccf4a2d3ce0b97bfa41039ffd5d38ebb34697ce35067fa47116d8144dd110",
+    "lean/Generated/NutCore/Part034.lean": "c0aaaaea46de06a85c205010792ff6a916ef7d2558fc1d9f023930e046e5af67",
+    "lean/Generated/NutCore/Part035.lean": "e733838d64ced6738119f5ee165ef084d8e374a82effca12b8951b3b3519f71e",
+    "lean/Generated/NutCore/Part036.lean": "8211770c15e5dcd35a22d1e4843710f5969cf16ad08981ac283364a7c0e78f80",
+    "lean/Generated/NutCore/Part037.lean": "3d453a754c5cb4b05dc8751e65e828819f0499f8a5062d0557e8b2d5b01be736",
+    "lean/Generated/NutCore.lean": "d830dc7b81c3b7b053443eb82c52fde83276e116299f1824921f2d39fb4d35f5"
+  },
+  "lean_runtime_crosscheck": {
+    "cycle": 27,
+    "expressions": 37979,
+    "result": "all agree",
+    "command": [
+      "python3",
+      "scripts/check-trace-evaluator.py",
+      "--trace",
+      "build/jalr-4g-trace.json"
+    ]
+  },
+  "temporary_restriction": {
+    "definition": "NutShellProofs.TemporaryIDUPC32",
+    "file": "lean/Proofs/TemporaryPC32.lean",
+    "scope": "All valid IDU instructions after initial reset, including speculative instructions, must have PC bits 32\u201338 zero. Explicit extra premise only; original model and Environment unchanged.",
+    "restricted_goal_proved": false
+  }
+}

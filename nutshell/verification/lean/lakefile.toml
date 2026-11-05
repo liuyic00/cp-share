@@ -1,0 +1,13 @@
+name = "NutShellLean"
+version = "0.1.0"
+defaultTargets = ["Generated", "Proofs"]
+
+[[lean_lib]]
+name = "Generated"
+moreLeanArgs = ["-s", "65536"]
+globs = ["Generated.+"]
+
+[[lean_lib]]
+name = "Proofs"
+moreLeanArgs = ["-s", "65536"]
+globs = ["Proofs.+"]

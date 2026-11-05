@@ -1,0 +1,101 @@
+[
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Core>_T_4"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>mem_1"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>rf"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|CSR>io.expt"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>REG_4"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>ew_reg.pc"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>regWrite"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>_T_18"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>REG_3"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>REG_2"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>flywire_rs2_addr"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>flywire_rs1_addr"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>ew_reg.inst"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>instOrder"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>instCommit"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>mem_wdata"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>mem_wmask"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>load_mask"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>io.dcache.resp.bits.data"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>_T_9"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|Datapath>_T_8"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|RegFile>resultRegWire"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~CoreSoc|CSR>resultEventWire"
+  },
+  {
+    "class": "firrtl.transforms.formal.DontAssertSubmoduleAssumptionsAnnotation$"
+  },
+  {
+    "class": "firrtl.transforms.BlackBoxTargetDirAnno",
+    "targetDir": "${TASK_ROOT}/build/high"
+  }
+]

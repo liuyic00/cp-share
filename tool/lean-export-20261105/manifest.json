@@ -1,0 +1,33 @@
+{
+  "platform": "Linux x86_64",
+  "archive": "lean-export-linux-x86_64.tar.xz",
+  "archive_sha256": "6e2e6951047ea1fc436a80b201a68016443dc502736ba52a1364b53c648235ab",
+  "archive_bytes": 21042900,
+  "archive_root": "lean-tools-size",
+  "processing": "Copies stripped with strip --strip-unneeded; original files unchanged",
+  "circt_version": "9de24b873409b154c977a015dff1a40f02ef020b",
+  "spot_version": "2.16",
+  "plugin_identity": "Pinned by original and stripped SHA-256; verified by full Chisel-to-Lean regeneration for both tasks. Source revision is not independently embedded in this binary.",
+  "files": {
+    "bin/circt-opt": {
+      "sha256": "bedeee0861002ef5a31f7364ad74a0b728155052d9e82136823697d0dbdeb4f3",
+      "original_sha256": "a83ce73615cc9cc846bc82dc1499d9527ff733aceb2ad16fbe97ec91131bc548",
+      "bytes": 86041376
+    },
+    "lib/CIRCTSpotPlugin.so": {
+      "sha256": "1c0fde4191abb8e0d1e6e25aa683d6fadd97c00765c8757ba07009f57be44b0a",
+      "original_sha256": "1a81cac9f144d5f220a440220f3309895cd65688582e9350f0b4b70f9d9a9abb",
+      "bytes": 12056584
+    },
+    "lib/libspot.so.0": {
+      "sha256": "e62f5595969cae665ecdabc348b25342b66a1a97dc76fc4038eda6b1c93c04b6",
+      "original_sha256": "eacb33adcfc5ac4df91920c31f9b9920ad6084bd6771ea1f4c86850bc68446df",
+      "bytes": 5597840
+    },
+    "lib/libbddx.so.0": {
+      "sha256": "3bb6bb6ede7c6acabd792d9fe3957f088ad06b6993fa91811c49a92a1041b71d",
+      "original_sha256": "8ea2bdd3dba996e2465eb2a6ab71415fbb5c61a5251b6f4cceafd689277a8edc",
+      "bytes": 166296
+    }
+  }
+}

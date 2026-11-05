@@ -1,0 +1,297 @@
+[
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|NutCore>mem"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|Cache_fake_1>ismmio"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>io.in.bits.mem_rvfi.wdata"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>io.in.bits.mem_rvfi.rdata"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>io.in.bits.mem_rvfi.wmask"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>io.in.bits.mem_rvfi.rmask"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>io.in.bits.mem_rvfi.addr_real"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>_T_151"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>_T_145"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>_T_142"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>io.wb.rfDest"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>io.in.bits.decode.data.src2"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>io.in.bits.decode.data.src1"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>io.in.bits.decode.ctrl.rfSrc2"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>io.in.bits.decode.ctrl.rfSrc1"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>io.in.bits.decode.cf.instr"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>rvfi_order"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>io.in.valid"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>rf"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>_T_140"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|WBU>falseWire"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|EXU>_T_22"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|EXU>_T_21"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|EXU>_T_20"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|EXU>_T_19"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|EXU>_T_17"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|MOU>flushTLB"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|MOU>flushICache"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|CSR>REG"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|CSR>resultEventWire"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|CSR>resultCSRWire"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|CSR>_WIRE"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|CSR>intrVec"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|CSR>lrAddr"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|CSR>lr"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|MDU>_T_5"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|UnpipelinedLSU>setLrAddr"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|UnpipelinedLSU>setLrVal"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|UnpipelinedLSU>setLr"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|UnpipelinedLSU>amoReq"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|LSExecUnit>io.isMMIO"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|LSExecUnit>r_1"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|LSExecUnit>r"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|LSExecUnit>_T_61"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|LSExecUnit>io.in.bits.src1"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_146"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_144"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_142"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_140"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_138"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_134"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_130"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_124"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_119"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_113"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_108"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_102"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_97"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_91"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_86"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_85"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>REG"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ALU>_T_2"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ISU>_T_13"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ISU>_T_12"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ISU>_T_9"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|ISU>resultRegWire"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|Decoder_1>_T_237"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|Decoder>_T_237"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|IFU_inorder>_T_19"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|IFU_inorder>r"
+  },
+  {
+    "class": "firrtl.transforms.DontTouchAnnotation",
+    "target": "~NutCore|NutCore>io.rf"
+  },
+  {
+    "class": "firrtl.transforms.formal.DontAssertSubmoduleAssumptionsAnnotation$"
+  },
+  {
+    "class": "firrtl.transforms.BlackBoxTargetDirAnno",
+    "targetDir": "${TASK_ROOT}/build/high"
+  }
+]

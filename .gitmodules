@@ -1,0 +1,8 @@
+[submodule "riscv-mini/source"]
+	path = riscv-mini/source/riscv-mini-coq
+	url = https://github.com/chenjie35335/riscv-mini-coq.git
+	branch = JSA25
+[submodule "nutshell/source"]
+	path = nutshell/source/nutshell-fv
+	url = https://github.com/SeddonShen/nutshell-fv.git
+	branch = JSA25

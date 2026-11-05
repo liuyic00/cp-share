@@ -1,0 +1,29 @@
+{
+  "source": "build/jalr-4g-trace.json",
+  "cycles": 28,
+  "signals": 40540,
+  "events": [
+    {
+      "cycle": 24,
+      "time_ns": 240,
+      "assertions_failed": [],
+      "assumptions_rejected": [],
+      "temporary_pc32_ok": false,
+      "idu_pc": "0x100000000"
+    },
+    {
+      "cycle": 27,
+      "time_ns": 270,
+      "assertions_failed": [
+        43,
+        45,
+        46,
+        47
+      ],
+      "assumptions_rejected": [],
+      "temporary_pc32_ok": true,
+      "idu_pc": "0x100000000"
+    }
+  ],
+  "status": "Concrete generated-model replay; not a kernel proof or independent RTL simulation"
+}

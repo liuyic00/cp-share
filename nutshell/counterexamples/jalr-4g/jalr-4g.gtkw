@@ -1,0 +1,17 @@
+[*] Key counterexample signals
+@28
+monitor.clock
+monitor.cycle
+inputs.reset
+monitor.original_assumptions_ok
+monitor.original_assertions_ok
+monitor.temporary_pc32_ok
+registers.frontend_valid
+registers.frontend_idu_io_in_0_bits_r_pc
+outputs.rvfi_valid
+outputs.rvfi_pc_rdata
+outputs.rvfi_insn
+assertions.assert_43_ok
+assertions.assert_45_ok
+assertions.assert_46_ok
+assertions.assert_47_ok
