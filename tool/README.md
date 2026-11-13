@@ -5,6 +5,7 @@
 - [arithmetic-export-20261112](arithmetic-export-20261112/README.md)：算术任务四个后端的固定工具，包含 firtool 和导出插件源码快照。
 
 - [firrtl2coq](firrtl2coq/README.md)：FIRRTL 到 Coq 的转换器和语义库，作为 Git 子模块固定版本；本项目的编译方法见下文。
+- [VerilRocq](VerilRocq/README.md)：Verilog 语义及 RISC-V 证明案例，使用 `oopsla2025-fix` 分支的固定提交。
 
 每个版本保存在独立子目录；新增版本不覆盖旧包。任务 manifest 的 tool_bundle 指定所用版本。
 工具压缩包使用 Git LFS 存储。安装 Git LFS 后，在仓库根目录执行：
@@ -72,3 +73,24 @@ Error: Some record fields are undefined: storage_id
 `src/ocaml/lib/transhiast_without_inline.ml` 仍缺少新增字段。因此前述 `482f062`
 的转换成功结论不适用于当前版本。日志为 `build/firrtl2coq/58759b5-coq.log`
 和 `build/firrtl2coq/58759b5-validation.log`；未修改子模块源码。
+
+## VerilRocq
+
+上游：https://github.com/verilog-proof/VerilRocq 。子模块位于 `tool/VerilRocq/`，
+2026-11-13 检查上游，`oopsla2025-fix` 无新提交；固定提交 `809e8ed832e46dc6d1a67b164f1663c4aec5e5af`。
+该分支保留论文的 RISC-V 端到端证明案例，并包含时钟语义等价性修复；
+`core` 只保留核心框架，`oopsla2025` 对应原始论文版本。
+
+上游要求 Rocq 9.0.1（`coq` 兼容包），README 使用 OCaml 4.14.4，
+应按其说明使用独立 switch，不复用 firrtl2coq 的 Coq 8.16 环境。
+当前仅下载源码和依赖子模块，未安装其工具链或检查证明。
+
+依赖子模块使用 SSH 地址；没有 GitHub SSH 配置时，可临时通过 HTTPS 初始化：
+
+```sh
+git -c url.https://github.com/.insteadOf=git@github.com: \
+  submodule update --init --recursive tool/VerilRocq
+```
+
+该分支 README 明确列出语义适用条件和已知限制，包括按整个 process 排序的约束，
+以及 packed bit 写入的求值限制；选用修复分支不表示这些问题已全部解决。

@@ -9,3 +9,7 @@
 [submodule "tool/firrtl2coq"]
 	path = tool/firrtl2coq
 	url = https://github.com/wky17/firrtl2coq.git
+[submodule "tool/VerilRocq"]
+	path = tool/VerilRocq
+	url = https://github.com/verilog-proof/VerilRocq.git
+	branch = oopsla2025-fix
