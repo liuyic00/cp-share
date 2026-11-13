@@ -1,0 +1,62 @@
+{
+  "Adder": {
+    "hw_sha256": "180a9420b976a4f8cba28cdf975c8a63fb6db0b0675df0004b580606aba2322b",
+    "rocq_sha256": "04b5b262e5cfe83f1d5acf48ce7216cb75855d47288cda5583fa6c06f0b304cc",
+    "lean_declarations_identical": true
+  },
+  "MultiCycleMac": {
+    "hw_sha256": "8517d96355ef48a4aec045b0feb3c13b5dbec59aca28e3ae5455f683f7c5de62",
+    "rocq_sha256": "8c57a1842d492ebd999570cfb7a218878861d24ea26f8463cd09ad3197abe250",
+    "lean_declarations_identical": true
+  },
+  "CSA2_2": {
+    "hw_sha256": "e7ecdf151b7f8c1113031636990f7050a3f00ed08ecb298396e3ed465f153710",
+    "rocq_sha256": "e68f526a7bbe2fa8edd22a2b0251a773fef189bbfb4bc5920f1e6e72c8f78af3",
+    "lean_declarations_identical": true
+  },
+  "CSA3_2": {
+    "hw_sha256": "fa7bb8b626fdb7cc38e19903ec0400465be084e37b7e23dba3245a0b798ccbce",
+    "rocq_sha256": "8195f819ca0b0fb1465e36fb3e00dad9dbf6609efabebe8a26615a3e26f30138",
+    "lean_declarations_identical": true
+  },
+  "CSA5_3": {
+    "hw_sha256": "eaa2f266b4639f750efec224e2934e6942131930306dd8a5f0afa3b5bcb0469b",
+    "rocq_sha256": "44520e211f584b7233fac3f0eaf587997bce6d8acba417a052732715ac8059f2",
+    "lean_declarations_identical": true
+  },
+  "C22": {
+    "hw_sha256": "0d91f5c17c4a4f1a409605406acecf7aa709b7268ed4058f33e44c6a078bb909",
+    "rocq_sha256": "dfb4897afe8f6e56d66fdcf5c20ab7bd4fe17c41b35aa672b16963c340082e7b",
+    "lean_declarations_identical": true
+  },
+  "C32": {
+    "hw_sha256": "c3d449f060d290f62d2365d2b2100af03e88df648080e22af3db8ee5225e36d4",
+    "rocq_sha256": "8932bdb38194268f80768fd0372f74fc7a53fd9bdc21d78560f5610f88aa09dd",
+    "lean_declarations_identical": true
+  },
+  "C53": {
+    "hw_sha256": "1ec81d33dde76366d010d50c57b15408966b11dbdee7aab109d73c6f08214e4f",
+    "rocq_sha256": "492f6b65ac0f07b95480c9924c4be415d532c26060d54ec7ffb90a0e92ff21ab",
+    "lean_declarations_identical": true
+  },
+  "ArrayMulDataModule": {
+    "hw_sha256": "e1925632a932c82574b485003572f4a2501769e8f3807909997f2318129d2417",
+    "rocq_sha256": "0d84b12bede4bd9a89eb0f29ffb53feef6777e29b871be78037e7329543116f0",
+    "lean_declarations_identical": true
+  },
+  "Radix2Divider": {
+    "hw_sha256": "0aa1b89ca058197297b59193ebfd73ccca21c9527734a469df9f529915470390",
+    "rocq_sha256": "d1f8ed256457b63e8fac8462b06151b18521d66e4be1870f66cfb680d2832485",
+    "lean_declarations_identical": true
+  },
+  "MulDiv": {
+    "hw_sha256": "3f0ca7aba6d03438b160a95019649a02d6c39ba309494414732fd410d5ce731b",
+    "rocq_sha256": "ca0581d8bb7b11527f2339614efd3439539b6e0f4b0892ed3fdf11afe19cd956",
+    "lean_declarations_identical": true
+  },
+  "MulDivChecked": {
+    "hw_sha256": "61e4f00c716402bf1e71b85219c3c1d5d6286b63ba8f0312353ed378ba539805",
+    "rocq_sha256": "0cacbe4f69ded3b8da63e1d81508338aff507a5cad08ab17cba026ae0891b7a5",
+    "lean_declarations_identical": true
+  }
+}

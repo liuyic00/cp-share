@@ -1,0 +1,15 @@
+name = "HierarchicalHardwareProofs"
+version = "0.1.0"
+defaultTargets = ["Generated", "Proofs"]
+
+[[lean_lib]]
+name = "Generated"
+# Large shared SSA functions contain thousands of dependent let bindings.
+moreLeanArgs = ["-s", "262144"]
+globs = ["Generated.+"]
+
+[[lean_lib]]
+name = "Proofs"
+moreLeanArgs = ["-s", "65536"]
+globs = ["Proofs.+"]
+

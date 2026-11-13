@@ -1,0 +1,75 @@
+{
+  "platform": "Linux x86_64",
+  "archive": "arithmetic-export-linux-x86_64.tar.xz",
+  "archive_root": "arithmetic-tools",
+  "processing": "Copies only: strip --strip-unneeded; deterministic tar metadata. Original binaries unchanged.",
+  "firtool_version": "1.158.0",
+  "circt_revision": "9de24b873409b154c977a015dff1a40f02ef020b",
+  "spot_version": "2.16",
+  "plugin_revision": "96e4c04c3027f94a07705632c1d7b8708112c4fc",
+  "plugin_identity": "Built from the archived fixed source revision with CMake Release, against the pinned CIRCT and Spot libraries.",
+  "files": {
+    "bin/circt-opt": {
+      "sha256": "bedeee0861002ef5a31f7364ad74a0b728155052d9e82136823697d0dbdeb4f3",
+      "original_sha256": "a83ce73615cc9cc846bc82dc1499d9527ff733aceb2ad16fbe97ec91131bc548",
+      "bytes": 86041376
+    },
+    "bin/firtool": {
+      "sha256": "80ae2202b22f55fad97846b21d976fdc92d089a2ece3ff1ac741c572b85b539d",
+      "original_sha256": "0768a90a57af806ea6da9eca8949d7e3b07cc0c08648d6b2c870bb9aec3b2fd4",
+      "bytes": 35712600
+    },
+    "lib/CIRCTSpotPlugin.so": {
+      "sha256": "bb71650cc263d8c5f42a038ffcab5aad702ec8b6a9bb379a85cf9c4de4db538a",
+      "original_sha256": "01d771109f7164df843cd3b7e8debfbc6dc7654fd49a1f612b29a1f8b610213d",
+      "bytes": 11917080
+    },
+    "lib/libspot.so.0": {
+      "sha256": "e62f5595969cae665ecdabc348b25342b66a1a97dc76fc4038eda6b1c93c04b6",
+      "original_sha256": "eacb33adcfc5ac4df91920c31f9b9920ad6084bd6771ea1f4c86850bc68446df",
+      "bytes": 5597840
+    },
+    "lib/libbddx.so.0": {
+      "sha256": "3bb6bb6ede7c6acabd792d9fe3957f088ad06b6993fa91811c49a92a1041b71d",
+      "original_sha256": "8ea2bdd3dba996e2465eb2a6ab71415fbb5c61a5251b6f4cceafd689277a8edc",
+      "bytes": 166296
+    },
+    "licenses/CIRCT-LICENSE": {
+      "sha256": "a46080a84f79accac59cf17463144cffa5b6a1dbbc394a9c7bd63ae8a81f1860",
+      "original_sha256": "a46080a84f79accac59cf17463144cffa5b6a1dbbc394a9c7bd63ae8a81f1860",
+      "bytes": 13235
+    },
+    "licenses/LLVM-LICENSE.TXT": {
+      "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee",
+      "original_sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee",
+      "bytes": 15141
+    },
+    "licenses/Spot-COPYING": {
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "original_sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "bytes": 35147
+    },
+    "licenses/circt-spot-LICENSE": {
+      "sha256": "4aef1979859ee054892b53c3716f5756ff3fec3dbeb652b3efd70aee39d18387",
+      "original_sha256": "4aef1979859ee054892b53c3716f5756ff3fec3dbeb652b3efd70aee39d18387",
+      "bytes": 12465
+    }
+  },
+  "archive_sha256": "080495832023b28914ce73c3eebbcb0c14d90d51993f833bf9b7b63b9d14ca27",
+  "archive_bytes": 27508528,
+  "source_archive": {
+    "file": "circt-spot-source.tar.xz",
+    "sha256": "4fa8b636892c9f5da595975658e546c6eeaa3d7c7a39b4279da63dd07cfff676"
+  },
+  "plugin_build": {
+    "type": "Release",
+    "compiler": "c++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+    "cmake": "cmake version 4.2.3"
+  },
+  "runtime_requirements": {
+    "glibc_min": "2.43",
+    "libstdcxx_symbol": "GLIBCXX_3.4.32",
+    "python_min": "3.12",
+    "java": "21"
+  }
+}

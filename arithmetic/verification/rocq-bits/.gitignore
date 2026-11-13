@@ -1,0 +1,12 @@
+*.vo
+*.vos
+*.vok
+*.glob
+.*.aux
+.lia.cache
+.nia.cache
+Makefile.rocq
+Makefile.rocq.conf
+.Makefile.rocq.d
+
+/Reference/
