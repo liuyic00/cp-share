@@ -30,4 +30,5 @@ object LegacyEmit extends App {
   emit("Radix2Divider", new singlefile.xiangshan.radix2divider.Radix2Divider(64))
   emit("MulDiv", new singlefile.rocket.MulDiv.MulDiv(singlefile.rocket.MulDiv.MulDivParams(), 64))
   emit("MulDivChecked", new singlefile.rocket.MulDiv.MulDivChecked)
+  emit("ArrayMulDataModule8", new singlefile.xiangshan.multiplier.ArrayMulDataModule8)
 }

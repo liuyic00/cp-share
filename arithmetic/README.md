@@ -1,6 +1,6 @@
 # arithmetic：算术电路与证明
 
-从私有 chisel-examples 仓库整理的 12 个具体算术电路实例。`source/` 是直接纳入 Git 的
+从私有 chisel-examples 仓库整理的 12 个具体算术电路实例，以及新增的 8 位香山乘法器实例。`source/` 是直接纳入 Git 的
 Chisel 7 工程及电路源码，不是子模块，不需要访问原仓库。来源与文件哈希固定在 `manifest.json`。
 
 ## 目录
@@ -40,6 +40,24 @@ Scala/Chisel/firtool/exporter 转换仍属于可信边界，文件哈希只用�
 保留原证明所用的自动化及其公理依赖；部分 Lean 位向量证明的审计输出含
 `Lean.ofReduceBool` / `Lean.trustCompiler`，不能套用 CPU 项目“仅三个标准公理”的说明。
 
+## 小规模香山乘法器
+
+`ArrayMulDataModule8` 复用 `ArrayMulDataModule(8)`，输入各 8 位，乘积 16 位。
+新旧 Chisel 工程均导出此独立实例，原 65 位实例及其证明保持不变。
+8 位参数生成的压缩树较浅，只有第一级流水寄存器；不能用它替代原实例的两级流水验证。
+其 48 条展开断言随模型保留，**尚未为此参数添加性质证明**。
+
+| 实例 | Low FIRRTL | 展平 HW MLIR（含断言） |
+|---|---:|---:|
+| ArrayMulDataModule(65) | 3,109,550 字节 | 4,204,174 字节 |
+| ArrayMulDataModule8 | 96,424 字节 | 58,189 字节 |
+| Radix2Divider(64) | 73,408 字节 | 36,172 字节 |
+
+展平 HW 使用固定工具包的 `strip-om,hw-flatten-modules,hw.module(hw-aggregate-to-comb),canonicalize`
+流水线测量。8 位实例约为除法器的 1.6 倍、原乘法器的 1/72。
+High/Low 文件保存在 `artifacts/chisel3/firrtl/ArrayMulDataModule8.{hi,lo}.fir`；
+四个后端的 HW 和模型仍不提交，使用下文 `regenerate.py --backend all` 一并恢复。
+
 ## 首次拉取：恢复省略的文件
 
 High/Low FIRRTL 全部保留在 Git：`artifacts/chisel3/firrtl/`。以下文件被 `.gitignore` 排除：
@@ -71,7 +89,7 @@ python3 scripts/check.py --sources --backend all
 
 生成入口会先验证全部选定产物的哈希，再写回 `.gitignore` 中列出的文件；不会覆盖手写证明，
 也不会自动更新预期哈希。首次恢复成功后，再按下一节的 `--build` 命令运行证明检查。
-此次已从缺少全部 1,713 个省略文件的状态恢复并逐字比较；这验证重建过程，不代表重新检查证明正确性。
+原 12 个实例曾从缺少全部 1,713 个省略文件的状态恢复并逐字比较；这验证重建过程，不代表重新检查证明正确性。
 
 ## 检查已有证明
 
@@ -100,7 +118,7 @@ opam switch create rocq-bits ocaml-base-compiler.4.14.2 --no-switch
 opam install --switch=rocq-bits rocq-core.9.3.0 rocq-stdlib.9.2.0
 ```
 
-`check.py` 还检查已登记文件哈希、12 个模型入口、Lean 本地 import 和证明占位符；
+`check.py` 还检查已登记文件哈希、13 个模型入口、Lean 本地 import 和证明占位符；
 这些静态检查不代替编译。`--sources` 同时核对直接收录的源码。
 根目录的 `scripts/verify.py arithmetic --sources --build` 调用默认 Lean 入口。
 
@@ -132,7 +150,7 @@ python3 scripts/regenerate.py --backend lean
 ## 旧版 Chisel：原生 High / Low FIRRTL
 
 `source-legacy/` 是独立的 Mill 工程，使用 Chisel 3.6.0、Scala 2.13.10、Scala FIRRTL 1.6.0、
-Temurin 17.0.15、Mill 1.1.2。它引用 `source/` 中同一套电路源码，生成全部 12 个相同参数的实例。
+Temurin 17.0.15、Mill 1.1.2。它引用 `source/` 中同一套电路源码，生成全部 13 个实例，参数与新版一致。
 电路及 assert 没有另写一份，两个项目使用各自的编译缓存。
 
 ```sh
@@ -146,7 +164,7 @@ cd source-legacy
 ```
 
 旧版 `chisel3.stage.ChiselStage` 的 `-X high`、`-X low` 直接生成传统 FIRRTL 1.2.0 文本：
-`artifacts/chisel3/firrtl/<模块>.hi.fir` 和 `<模块>.lo.fir`，共 24 个文件。
+`artifacts/chisel3/firrtl/<模块>.hi.fir` 和 `<模块>.lo.fir`，共 26 个文件。
 中间 CHIRRTL 与注解留在 `build/`。不需要 CIRCT 文本导出器或自定义 FIRRTL 文本转换工具。
 
 `legacy-manifest.json` 固定版本、源码和产物哈希；`check.py --sources` 同时核对两个项目，
@@ -157,7 +175,7 @@ Scala FIRRTL 的位置注解含源码检出路径；跨绝对路径生成时可�
 
 ## 验证记录
 
-- 旧版 24 个 High/Low FIRRTL 重生成与快照逐字一致。
+- 新增 8 位实例后，旧版 26 个 High/Low FIRRTL 重生成与快照逐字一致。
 - 已完成的四后端 HW/模型重生成与固定快照逐字一致，证明源码保持不变。
 - 2026-11-12 四个后端的证明构建/检查通过。2026-11-13 两个 Lean 后端和 Coq 复查通过；
   Rocq bits 复查按用户要求在 refinement 编译阶段停止，未完成该轮内核检查。

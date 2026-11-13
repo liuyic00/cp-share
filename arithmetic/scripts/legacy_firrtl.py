@@ -57,7 +57,7 @@ def main():
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes(fresh.read_bytes())
     check_snapshot(sources=True)
-    print('All 12 legacy High/Low FIRRTL snapshots match exactly.')
+    print(f"All {len(manifest['instances'])} legacy High/Low FIRRTL snapshot pairs match exactly.")
 
 if __name__ == '__main__':
     main()

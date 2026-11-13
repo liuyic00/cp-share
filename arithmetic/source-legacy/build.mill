@@ -11,7 +11,7 @@ object Examples extends SbtModule {
   override def scalacPluginMvnDeps = Seq(mvn"edu.berkeley.cs:::chisel3-plugin:3.6.0")
   override def sources = Task {
     super.sources() ++ Seq(
-      "xiangshan/Multiplier.scala", "xiangshan/Radix2Divider.scala",
+      "xiangshan/Multiplier.scala", "xiangshan/SmallMultiplier.scala", "xiangshan/Radix2Divider.scala",
       "basic/alu/Adder.scala", "basic/fsm/MultiCycleMac.scala", "rocket/MulDiv.scala"
     ).map(name => PathRef(moduleDir / os.up / "source/src/main/scala/singlefile" / os.RelPath(name)))
   }

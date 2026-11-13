@@ -4,7 +4,8 @@
     "origin": "chisel-examples (private local repository)",
     "commit": "0f3e42e19774dc7d6b487a956c0f4e06ecd1af8a",
     "changes": [
-      "Arithmetic sources only; emitter paths adapted for isolated regeneration; proof generation removed."
+      "Arithmetic sources only; emitter paths adapted for isolated regeneration; proof generation removed.",
+      "Added a separate 8-bit XiangShan multiplier instance without changing the original circuit implementation."
     ]
   },
   "instances": [
@@ -19,7 +20,8 @@
     "ArrayMulDataModule",
     "Radix2Divider",
     "MulDiv",
-    "MulDivChecked"
+    "MulDivChecked",
+    "ArrayMulDataModule8"
   ],
   "toolchains": {
     "mill": "1.1.2",
@@ -36,8 +38,8 @@
     "source/build.mill": "4660059ee5b899f332f2fca1ed47dfb2cb0fbb31fe4bd0017b589473202feb5b",
     "source/mill": "1d3e2677cefa2c6ae50f5ad2ce9e45db4a66b09241a220e6438a285fd1964ae1",
     "source/src/main/scala/singlefile/Emit.scala": "967840fd2a3c849c5375aeab05bd3f53e367b1d42d55d2965c5e01e5baccfed5",
-    "source/src/main/scala/singlefile/HierarchicalLeanEmit.scala": "22ee8d305f66e63f7e5d2dc19fd29f92286aeba2fdcc4129ea2ad10f29c5bad4",
-    "source/src/main/scala/singlefile/LeanEmit.scala": "e3ac65a0fe4607cfd24fc452b5a83ef1c84a4af3ae8143e6c4bd5b2a1e1d8ca7",
+    "source/src/main/scala/singlefile/HierarchicalLeanEmit.scala": "604d170c3167089d9cb6e35a747999befcef2459c1fd3275660f5319a9927991",
+    "source/src/main/scala/singlefile/LeanEmit.scala": "16d3d983368cf92e084348bb83a648a882babca69896c704f4389461e9da44c6",
     "source/src/main/scala/singlefile/basic/alu/Adder.scala": "b3c7bfc8053a8f5212f2765cd2ea854353238dc2b438480b8a9c63f446cdf09e",
     "source/src/main/scala/singlefile/basic/fsm/MultiCycleMac.scala": "c7c811cae5437318daedc52323bf6ee5d08cc14a6ab167d3a2b3afc957117d6d",
     "source/src/main/scala/singlefile/rocket/MulDiv.scala": "70bf125a51b6b35d75e4115f634f901c57ecba7fca47d487a0c48329bc88c7f4",
@@ -752,7 +754,8 @@
     "scripts/lean-proof-generators/prove-hierarchical-array-children.py": "992953dbe9492046014e669efbb7910a45f3e07c68e596cdfdd33f8ee2a72dbd",
     "scripts/lean-proof-generators/prove-hierarchical-array-selectors.py": "9e97a4940412dbbee0c2e5648815237f7cba7dffc549f5b6f11732aed0111f74",
     "scripts/lean-proof-generators/prove-hierarchical-array-tree.py": "7d5d7cd4e1e6ea9928b7d8bfb49b87bf76ea93313eb4d507dc6e8029e9d8baf7",
-    "scripts/lean_proofs.py": "9bcd88e0d4f9371d50055f9d8d0fba8ffdff29e79a3ac62103a7cca0f38ed202"
+    "scripts/lean_proofs.py": "9bcd88e0d4f9371d50055f9d8d0fba8ffdff29e79a3ac62103a7cca0f38ed202",
+    "source/src/main/scala/singlefile/xiangshan/SmallMultiplier.scala": "9b1b98fe13bff35ddd9fc5b139d64e049b5d2fc653837f03a5df7cdec544cb24"
   },
   "tool_bundle": {
     "directory": "arithmetic-export-20261112",
@@ -2483,11 +2486,24 @@
     "verification/rocq/Generated/MulDiv.v": "ca0581d8bb7b11527f2339614efd3439539b6e0f4b0892ed3fdf11afe19cd956",
     "verification/rocq/Generated/MulDivChecked.v": "0cacbe4f69ded3b8da63e1d81508338aff507a5cad08ab17cba026ae0891b7a5",
     "verification/rocq/Generated/MultiCycleMac.v": "8c57a1842d492ebd999570cfb7a218878861d24ea26f8463cd09ad3197abe250",
-    "verification/rocq/Generated/Radix2Divider.v": "d1f8ed256457b63e8fac8462b06151b18521d66e4be1870f66cfb680d2832485"
+    "verification/rocq/Generated/Radix2Divider.v": "d1f8ed256457b63e8fac8462b06151b18521d66e4be1870f66cfb680d2832485",
+    "artifacts/chisel7/mlir/lean-hierarchical/ArrayMulDataModule8.hw.mlir": "48d331eaec350223f2766162d6b1913dbc94e9585fca45912ed6cda274c213eb",
+    "artifacts/chisel7/mlir/rocq/ArrayMulDataModule8.hw.mlir": "48d331eaec350223f2766162d6b1913dbc94e9585fca45912ed6cda274c213eb",
+    "artifacts/chisel7/mlir/lean/ArrayMulDataModule8.hw.mlir": "48d331eaec350223f2766162d6b1913dbc94e9585fca45912ed6cda274c213eb",
+    "artifacts/chisel7/mlir/rocq-bits/ArrayMulDataModule8.hw.mlir": "48d331eaec350223f2766162d6b1913dbc94e9585fca45912ed6cda274c213eb",
+    "verification/rocq-bits/Generated/ArrayMulDataModule8.v": "9a5b75aafa5d2cc21778d94d9861b42d8368c972bea1144fbae6ede074996fde",
+    "verification/lean/Generated/ArrayMulDataModule8.lean": "87b04a95ed84c8673295a2cb0c0c713fe8f7912512c0996c55dc60f0636c7bbc",
+    "verification/rocq/Generated/ArrayMulDataModule8.v": "72a95164adf569085def4c3ec0bac73a67ca58e6c6c6bc86cc4f538432b8802b",
+    "verification/lean-hierarchical/Generated/ArrayMulDataModule8.lean": "871358311aeacbd8ab0e33a631f00e7913648d7fabde6f01ef0a7bdd907fbd4e",
+    "verification/lean-hierarchical/Generated/ArrayMulDataModule8/Part000.lean": "90c9ac142282f0d702d4ac2fb4b8b52f13110215e1c52964ec8ecf506452d96f",
+    "verification/lean-hierarchical/Generated/ArrayMulDataModule8/Part001.lean": "a2a3e872ad2dfc0ed24e4fd88287920e8da0a7b790282eba00481c255e55b5b1"
   },
   "proof_generators": {
     "source": "chisel-examples/scripts (vendored; paths adapted)",
     "directory": "scripts/lean-proof-generators",
     "check": "1572 outputs reproduced byte-for-byte; other proof sources remain tracked"
-  }
+  },
+  "unproven_instances": [
+    "ArrayMulDataModule8"
+  ]
 }

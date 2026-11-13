@@ -44,4 +44,5 @@ object HierarchicalLeanEmit extends App {
     emit("Radix2Divider", new xiangshan.radix2divider.Radix2Divider(64))
     emit("MulDiv", new rocket.MulDiv.MulDiv(rocket.MulDiv.MulDivParams(), 64))
     emit("MulDivChecked", new rocket.MulDiv.MulDivChecked)
+    emit("ArrayMulDataModule8", new xiangshan.multiplier.ArrayMulDataModule8)
 }

@@ -17,17 +17,19 @@
     "ArrayMulDataModule": 65,
     "Radix2Divider": 64,
     "MulDiv": 64,
-    "MulDivChecked": 64
+    "MulDivChecked": 64,
+    "ArrayMulDataModule8": 8
   },
   "sources": {
-    "source-legacy/build.mill": "b2dabc284b47684ee7c8aba66518dc6ec09fcd32ebdeba08d32921739993b3e1",
+    "source-legacy/build.mill": "b2309af2dfd2b65c18d24ebb198a03196eb4a546f066512d94e3a1d696cc07b1",
     "source-legacy/mill": "1d3e2677cefa2c6ae50f5ad2ce9e45db4a66b09241a220e6438a285fd1964ae1",
-    "source-legacy/src/main/scala/LegacyEmit.scala": "718eceee177ec14efc715f09c6ddf7ec11bdef3bb007a0190a94617f76c19f53",
+    "source-legacy/src/main/scala/LegacyEmit.scala": "3d03bf32a01390b490cc4575bb75ddb8d0494313f14d8dd6304f7d11a0bb575f",
     "source/src/main/scala/singlefile/xiangshan/Multiplier.scala": "141c2e0e986e1ba8f25d6cdac7b3bf8e05e5a0a8f458e9480e4680f297ecab9d",
     "source/src/main/scala/singlefile/xiangshan/Radix2Divider.scala": "228353b0e94a573af90532353fa73440e5e0cf2bb9c2143d56c0de8a4ee94bec",
     "source/src/main/scala/singlefile/basic/alu/Adder.scala": "b3c7bfc8053a8f5212f2765cd2ea854353238dc2b438480b8a9c63f446cdf09e",
     "source/src/main/scala/singlefile/basic/fsm/MultiCycleMac.scala": "c7c811cae5437318daedc52323bf6ee5d08cc14a6ab167d3a2b3afc957117d6d",
-    "source/src/main/scala/singlefile/rocket/MulDiv.scala": "70bf125a51b6b35d75e4115f634f901c57ecba7fca47d487a0c48329bc88c7f4"
+    "source/src/main/scala/singlefile/rocket/MulDiv.scala": "70bf125a51b6b35d75e4115f634f901c57ecba7fca47d487a0c48329bc88c7f4",
+    "source/src/main/scala/singlefile/xiangshan/SmallMultiplier.scala": "9b1b98fe13bff35ddd9fc5b139d64e049b5d2fc653837f03a5df7cdec544cb24"
   },
   "outputs": {
     "artifacts/chisel3/firrtl/Adder.hi.fir": "7da409e937e2f0d4f999049c55ce8b9ee5cfca4673631310b457f4219edc97d3",
@@ -53,7 +55,9 @@
     "artifacts/chisel3/firrtl/MultiCycleMac.hi.fir": "76e8ebf2616d1cb57880cc117614eda64d65d6ab3cd9bbd42a503d9e25aa815d",
     "artifacts/chisel3/firrtl/MultiCycleMac.lo.fir": "53a7983884aaf147b4a458ccd50ea599760b047a4acd78b1ebbd6d3f545c13ba",
     "artifacts/chisel3/firrtl/Radix2Divider.hi.fir": "ce71d71bfd262878579d03a98ccfe277f3ef85b092025154c2798147fe2d7e18",
-    "artifacts/chisel3/firrtl/Radix2Divider.lo.fir": "e647feb5f44df060220148bac82a0a0b34bdc9e57eb70970ba4aff7c7bd8f130"
+    "artifacts/chisel3/firrtl/Radix2Divider.lo.fir": "e647feb5f44df060220148bac82a0a0b34bdc9e57eb70970ba4aff7c7bd8f130",
+    "artifacts/chisel3/firrtl/ArrayMulDataModule8.lo.fir": "f4f606bc388f0545d27c341766428d85232342d773c4c76ac6c1aa37bbd03869",
+    "artifacts/chisel3/firrtl/ArrayMulDataModule8.hi.fir": "f6d800165b3c26222e5f8cc312141ec1a353ac34be2bc379a048a035063fdb06"
   },
   "source_project": "source-legacy",
   "shared_circuits": "source/src/main/scala/singlefile",
