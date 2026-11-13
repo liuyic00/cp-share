@@ -6,3 +6,6 @@
 	path = nutshell/source/nutshell-fv
 	url = https://github.com/SeddonShen/nutshell-fv.git
 	branch = JSA25
+[submodule "tool/firrtl2coq"]
+	path = tool/firrtl2coq
+	url = https://github.com/wky17/firrtl2coq.git
