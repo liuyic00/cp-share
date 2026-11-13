@@ -1,0 +1,35 @@
+FIRRTL version 1.2.0
+circuit C22 :
+  module C22 :
+    input clock : Clock
+    input reset : UInt<1>
+    output io : { flip in : UInt<1>[2], out : UInt<1>[2]} @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 17:14]
+
+    node _inputSum_T = pad(io.in[0], 4) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 24:33]
+    node _inputSum_T_1 = pad(io.in[1], 4) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 24:33]
+    node _inputSum_T_2 = add(_inputSum_T, _inputSum_T_1) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 24:53]
+    node inputSum = tail(_inputSum_T_2, 1) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 24:53]
+    node _outputSum_T = pad(io.out[0], 4) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 26:28]
+    node _outputSum_T_1 = pad(io.out[1], 4) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 26:51]
+    node _outputSum_T_2 = shl(_outputSum_T_1, 1) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 26:61]
+    node _outputSum_T_3 = add(_outputSum_T, _outputSum_T_2) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 27:14]
+    node outputSum = tail(_outputSum_T_3, 1) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 27:14]
+    node _T = eq(inputSum, outputSum) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 28:19]
+    node _T_1 = bits(reset, 0, 0) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 28:9]
+    node _T_2 = eq(_T_1, UInt<1>("h0")) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 28:9]
+    when _T_2 : @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 28:9]
+      node _T_3 = eq(_T, UInt<1>("h0")) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 28:9]
+      when _T_3 : @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 28:9]
+        printf(clock, UInt<1>("h1"), "Assertion failed\n    at Multiplier.scala:28 assert(inputSum === outputSum)\n") : printf @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 28:9]
+      assert(clock, _T, UInt<1>("h1"), "") : assert @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 28:9]
+    wire temp : UInt<2>[1] @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 32:18]
+    node a = bits(io.in[0], 0, 0) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 34:27]
+    node b = bits(io.in[1], 0, 0) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 34:40]
+    node sum = xor(a, b) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 35:20]
+    node cout = and(a, b) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 36:20]
+    node _temp_0_T = cat(cout, sum) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 37:13]
+    temp[0] <= _temp_0_T @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 37:7]
+    node _io_out_0_T = bits(temp[0], 0, 0) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 39:76]
+    io.out[0] <= _io_out_0_T @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 39:50]
+    node _io_out_1_T = bits(temp[0], 1, 1) @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 39:76]
+    io.out[1] <= _io_out_1_T @[workspaces/cp-share/arithmetic/source/src/main/scala/singlefile/xiangshan/Multiplier.scala 39:50]

@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+from legacy_firrtl import check_snapshot
 
 ROOT = Path(__file__).resolve().parent.parent
 BACKENDS = ['lean', 'lean-hierarchical', 'rocq', 'rocq-bits']
@@ -36,6 +37,9 @@ for name, expected in {**m['files'], **m['generated_files']}.items():
         raise SystemExit('Missing generated file; run python3 scripts/regenerate.py --backend all: ' + name)
     if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
         raise SystemExit(f'snapshot mismatch: {name}')
+legacy = check_snapshot(sources=a.sources)
+if set(legacy['instances']) != set(m['instances']):
+    raise SystemExit('Chisel 3 and Chisel 7 instance inventories differ')
 for backend in selected:
     base = ROOT / 'verification' / backend
     suffix = '.lean' if backend.startswith('lean') else '.v'

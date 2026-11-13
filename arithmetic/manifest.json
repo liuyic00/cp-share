@@ -763,6 +763,11 @@
     "chisel7": {
       "source": "source",
       "hw": "artifacts/chisel7/mlir"
+    },
+    "chisel3": {
+      "source": "source-legacy",
+      "firrtl": "artifacts/chisel3/firrtl",
+      "manifest": "legacy-manifest.json"
     }
   },
   "generated_files": {

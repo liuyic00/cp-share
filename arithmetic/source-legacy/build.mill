@@ -1,0 +1,18 @@
+//| mill-version: 1.1.2
+package build
+import mill._
+import mill.scalalib._
+object Examples extends SbtModule {
+  def jvmVersion = "temurin:17.0.15"
+  def scalaVersion = "2.13.10"
+  def moduleDir = super.moduleDir / os.up
+  override def scalacOptions = Seq("-language:reflectiveCalls", "-deprecation", "-feature")
+  override def mvnDeps = Seq(mvn"edu.berkeley.cs::chisel3:3.6.0")
+  override def scalacPluginMvnDeps = Seq(mvn"edu.berkeley.cs:::chisel3-plugin:3.6.0")
+  override def sources = Task {
+    super.sources() ++ Seq(
+      "xiangshan/Multiplier.scala", "xiangshan/Radix2Divider.scala",
+      "basic/alu/Adder.scala", "basic/fsm/MultiCycleMac.scala", "rocket/MulDiv.scala"
+    ).map(name => PathRef(moduleDir / os.up / "source/src/main/scala/singlefile" / os.RelPath(name)))
+  }
+}

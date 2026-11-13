@@ -7,6 +7,8 @@ Chisel 7 工程及电路源码，不是子模块，不需要访问原仓库。�
 
 | 路径 | 内容 |
 |---|---|
+| `source-legacy/` | Chisel 3.6.0 工程，共用 source/ 的电路源码 |
+| `artifacts/chisel3/firrtl/` | 旧版直接生成的 High/Low FIRRTL |
 | `source/` | Chisel 7.15.0 工程、共享电路源码、测试和 HW/模型导出入口 |
 | `artifacts/chisel7/mlir/<backend>/` | 按需生成的 HW MLIR，不提交 Git |
 | `verification/lean/` | 展平 Lean 模型和证明 |
@@ -40,7 +42,7 @@ Scala/Chisel/firtool/exporter 转换仍属于可信边界，文件哈希只用�
 
 ## 首次拉取：恢复省略的文件
 
-以下可重建文件被 `.gitignore` 排除：
+High/Low FIRRTL 全部保留在 Git：`artifacts/chisel3/firrtl/`。以下文件被 `.gitignore` 排除：
 
 | 省略内容 | 恢复方法 |
 |---|---|
@@ -127,8 +129,35 @@ python3 scripts/regenerate.py --backend lean
 重新导出不等于性质已证明；修改电路或模型后应编译证明。编译链仍在可信边界内。
 修改源码或工具版本时必须审阅并显式更新固定哈希，脚本不会静默接受版本漂移。
 
+## 旧版 Chisel：原生 High / Low FIRRTL
+
+`source-legacy/` 是独立的 Mill 工程，使用 Chisel 3.6.0、Scala 2.13.10、Scala FIRRTL 1.6.0、
+Temurin 17.0.15、Mill 1.1.2。它引用 `source/` 中同一套电路源码，生成全部 12 个相同参数的实例。
+电路及 assert 没有另写一份，两个项目使用各自的编译缓存。
+
+```sh
+# 从 arithmetic/ 执行
+python3 scripts/legacy_firrtl.py --check
+# 恢复固定快照
+python3 scripts/legacy_firrtl.py
+# 或直接调用旧版 Scala 入口
+cd source-legacy
+./mill --no-server Examples.runMain LegacyEmit
+```
+
+旧版 `chisel3.stage.ChiselStage` 的 `-X high`、`-X low` 直接生成传统 FIRRTL 1.2.0 文本：
+`artifacts/chisel3/firrtl/<模块>.hi.fir` 和 `<模块>.lo.fir`，共 24 个文件。
+中间 CHIRRTL 与注解留在 `build/`。不需要 CIRCT 文本导出器或自定义 FIRRTL 文本转换工具。
+
+`legacy-manifest.json` 固定版本、源码和产物哈希；`check.py --sources` 同时核对两个项目，
+`regenerate.py --backend all --check` 同时重生成旧版 FIRRTL 和新版四后端 HW/模型。
+Scala FIRRTL 的位置注解含源码检出路径；跨绝对路径生成时可能出现位置注解差异，检查会报告而非静默改写哈希。
+
+当前已经完成的证明针对 Chisel 7 导出的模型，不声称新旧编译链已建立形式等价证明。
+
 ## 验证记录
 
+- 旧版 24 个 High/Low FIRRTL 重生成与快照逐字一致。
 - 已完成的四后端 HW/模型重生成与固定快照逐字一致，证明源码保持不变。
 - 2026-11-12 四个后端的证明构建/检查通过。2026-11-13 两个 Lean 后端和 Coq 复查通过；
   Rocq bits 复查按用户要求在 refinement 编译阶段停止，未完成该轮内核检查。

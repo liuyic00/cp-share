@@ -31,6 +31,9 @@ def main():
     p.add_argument('--tool', type=Path, default=ROOT.parent / 'tool/arithmetic-export-20261112')
     a = p.parse_args()
     subprocess.run([sys.executable, str(ROOT / 'scripts/check.py'), '--sources', '--allow-missing-generated'], check=True)
+    if a.backend == 'all':
+        subprocess.run([sys.executable, str(ROOT / 'scripts/legacy_firrtl.py'),
+                        *(['--check'] if a.check else [])], check=True)
     manifest_path = ROOT / 'manifest.json'
     manifest = json.loads(manifest_path.read_text())
     tool = a.tool.resolve(strict=True)
