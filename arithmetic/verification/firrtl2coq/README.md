@@ -21,6 +21,8 @@ python3 arithmetic/scripts/check_firrtl2coq_multiplier.py --jobs 2 --force
 
 `generate_firrtl2coq_models.py --firrtl-root /path/to/arithmetic/artifacts/chisel3/firrtl` 可指定输入目录。它将生成器留下的待证定理变成精确的 `Prop` 定义，生成操作本身不声称证明完成。两个检查脚本分别审计证明依赖、按依赖构建并执行 `coqchk`；通过后分别写入 `arithmetic/build/firrtl2coq-divider-proof/result.json` 和 `arithmetic/build/firrtl2coq-multiplier-proof/result.json`。`.vo`、生成模型、构建日志和该结果文件均不需要提交，hi/lo FIRRTL 输入保留。
 
+未进入最终证明依赖的探索文件及相关脚本保存在 [Archive/](Archive/README.md)，保留原文与原路径记录，不参与当前构建。
+
 ---
 
 # 旧版 Low FIRRTL 与 firrtl2coq：当前状态

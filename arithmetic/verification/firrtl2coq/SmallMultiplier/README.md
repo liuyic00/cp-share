@@ -38,14 +38,8 @@ python3 arithmetic/scripts/generate_firrtl2coq_models.py
 python3 arithmetic/scripts/check_firrtl2coq_multiplier.py --jobs 2 --force
 ```
 
-In this older test worktree the retained 8-bit Low FIRRTL lives in main. Use:
-
-```sh
-python3 arithmetic/scripts/generate_firrtl2coq_models.py \
-  --firrtl-root /workspaces/cp-share/arithmetic/artifacts/chisel3/firrtl
-python3 arithmetic/scripts/check_firrtl2coq_multiplier.py --jobs 2 --force \
-  --firrtl /workspaces/cp-share/arithmetic/artifacts/chisel3/firrtl/ArrayMulDataModule8.lo.fir
-```
+The retained 8-bit Low FIRRTL is available in this `ai-dev` worktree;
+the commands above use its default repository-local path.
 
 The model generator preserves the tool's exact assertion propositions as
 `Definition obligation_i : Prop`, rather than importing its admitted lemmas.
@@ -86,5 +80,8 @@ retained.
 
 The `prepare_*.py` and `*_certificate.py` scripts regenerate their corresponding
 proof certificates. These emit Coq proof terms/tactics, not trusted results;
-each output is checked by Coq. `check.py` is the older local-component checker;
-use the full verification script above for the complete arbitrary-step theorem.
+each output is checked by Coq. Unused intermediate proofs and their scripts,
+including the old component-only `check.py`, are preserved in
+[the exploration archive](../Archive/README.md). `CaptureAST.v` remains here
+because three current generators read its capture table. Use the full
+verification script above for the complete arbitrary-step theorem.
