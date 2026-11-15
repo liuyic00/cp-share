@@ -1,0 +1,148 @@
+From Coq Require Import NArith.
+From mathcomp Require Import ssreflect ssrbool ssrnat eqtype seq.
+From SmallMultiplier Require Import Child0Stable.
+Local Open Scope N_scope.
+Lemma word_6_congr v w (H0 : word_2 v = word_2 w) : word_6 v = word_6 w.
+Proof. unfold word_6, closed_word_6. rewrite H0. reflexivity. Qed.
+Lemma word_6_inputs v w (I0 : v 0 2 = w 0 2) : word_6 v = word_6 w.
+Proof. apply word_6_congr.
+ - assumption.
+Qed.
+Lemma word_7_congr v w (H0 : word_3 v = word_3 w) : word_7 v = word_7 w.
+Proof. unfold word_7, closed_word_7. rewrite H0. reflexivity. Qed.
+Lemma word_7_inputs v w (I0 : v 0 3 = w 0 3) : word_7 v = word_7 w.
+Proof. apply word_7_congr.
+ - assumption.
+Qed.
+Lemma word_8_congr v w (H0 : word_6 v = word_6 w) (H1 : word_7 v = word_7 w) : word_8 v = word_8 w.
+Proof. unfold word_8, closed_word_8. rewrite H0 H1. reflexivity. Qed.
+Lemma word_8_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_8 v = word_8 w.
+Proof. apply word_8_congr.
+ - apply word_6_inputs; assumption.
+ - apply word_7_inputs; assumption.
+Qed.
+Lemma word_9_congr v w (H0 : word_8 v = word_8 w) : word_9 v = word_9 w.
+Proof. unfold word_9, closed_word_9. rewrite H0. reflexivity. Qed.
+Lemma word_9_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_9 v = word_9 w.
+Proof. apply word_9_congr.
+ - apply word_8_inputs; assumption.
+Qed.
+Lemma word_19_congr v w (H0 : word_2 v = word_2 w) : word_19 v = word_19 w.
+Proof. unfold word_19, closed_word_19. rewrite H0. reflexivity. Qed.
+Lemma word_19_inputs v w (I0 : v 0 2 = w 0 2) : word_19 v = word_19 w.
+Proof. apply word_19_congr.
+ - assumption.
+Qed.
+Lemma word_20_congr v w (H0 : word_3 v = word_3 w) : word_20 v = word_20 w.
+Proof. unfold word_20, closed_word_20. rewrite H0. reflexivity. Qed.
+Lemma word_20_inputs v w (I0 : v 0 3 = w 0 3) : word_20 v = word_20 w.
+Proof. apply word_20_congr.
+ - assumption.
+Qed.
+Lemma word_21_congr v w (H0 : word_19 v = word_19 w) (H1 : word_20 v = word_20 w) : word_21 v = word_21 w.
+Proof. unfold word_21, closed_word_21. rewrite H0 H1. reflexivity. Qed.
+Lemma word_21_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_21 v = word_21 w.
+Proof. apply word_21_congr.
+ - apply word_19_inputs; assumption.
+ - apply word_20_inputs; assumption.
+Qed.
+Lemma word_22_congr v w (H0 : word_19 v = word_19 w) (H1 : word_20 v = word_20 w) : word_22 v = word_22 w.
+Proof. unfold word_22, closed_word_22. rewrite H0 H1. reflexivity. Qed.
+Lemma word_22_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_22 v = word_22 w.
+Proof. apply word_22_congr.
+ - apply word_19_inputs; assumption.
+ - apply word_20_inputs; assumption.
+Qed.
+Lemma word_23_congr v w (H0 : word_21 v = word_21 w) (H1 : word_22 v = word_22 w) : word_23 v = word_23 w.
+Proof. unfold word_23, closed_word_23. rewrite H0 H1. reflexivity. Qed.
+Lemma word_23_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_23 v = word_23 w.
+Proof. apply word_23_congr.
+ - apply word_21_inputs; assumption.
+ - apply word_22_inputs; assumption.
+Qed.
+Lemma word_24_congr v w (H0 : word_23 v = word_23 w) : word_24 v = word_24 w.
+Proof. unfold word_24, closed_word_24. rewrite H0. reflexivity. Qed.
+Lemma word_24_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_24 v = word_24 w.
+Proof. apply word_24_congr.
+ - apply word_23_inputs; assumption.
+Qed.
+Lemma word_25_congr v w (H0 : word_24 v = word_24 w) : word_25 v = word_25 w.
+Proof. unfold word_25, closed_word_25. rewrite H0. reflexivity. Qed.
+Lemma word_25_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_25 v = word_25 w.
+Proof. apply word_25_congr.
+ - apply word_24_inputs; assumption.
+Qed.
+Lemma word_4_congr v w (H0 : word_25 v = word_25 w) : word_4 v = word_4 w.
+Proof. unfold word_4, closed_word_4. rewrite H0. reflexivity. Qed.
+Lemma word_4_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_4 v = word_4 w.
+Proof. apply word_4_congr.
+ - apply word_25_inputs; assumption.
+Qed.
+Lemma word_10_congr v w (H0 : word_4 v = word_4 w) : word_10 v = word_10 w.
+Proof. unfold word_10, closed_word_10. rewrite H0. reflexivity. Qed.
+Lemma word_10_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_10 v = word_10 w.
+Proof. apply word_10_congr.
+ - apply word_4_inputs; assumption.
+Qed.
+Lemma word_26_congr v w (H0 : word_24 v = word_24 w) : word_26 v = word_26 w.
+Proof. unfold word_26, closed_word_26. rewrite H0. reflexivity. Qed.
+Lemma word_26_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_26 v = word_26 w.
+Proof. apply word_26_congr.
+ - apply word_24_inputs; assumption.
+Qed.
+Lemma word_5_congr v w (H0 : word_26 v = word_26 w) : word_5 v = word_5 w.
+Proof. unfold word_5, closed_word_5. rewrite H0. reflexivity. Qed.
+Lemma word_5_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_5 v = word_5 w.
+Proof. apply word_5_congr.
+ - apply word_26_inputs; assumption.
+Qed.
+Lemma word_11_congr v w (H0 : word_5 v = word_5 w) : word_11 v = word_11 w.
+Proof. unfold word_11, closed_word_11. rewrite H0. reflexivity. Qed.
+Lemma word_11_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_11 v = word_11 w.
+Proof. apply word_11_congr.
+ - apply word_5_inputs; assumption.
+Qed.
+Lemma word_12_congr v w (H0 : word_11 v = word_11 w) : word_12 v = word_12 w.
+Proof. unfold word_12, closed_word_12. rewrite H0. reflexivity. Qed.
+Lemma word_12_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_12 v = word_12 w.
+Proof. apply word_12_congr.
+ - apply word_11_inputs; assumption.
+Qed.
+Lemma word_13_congr v w (H0 : word_10 v = word_10 w) (H1 : word_12 v = word_12 w) : word_13 v = word_13 w.
+Proof. unfold word_13, closed_word_13. rewrite H0 H1. reflexivity. Qed.
+Lemma word_13_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_13 v = word_13 w.
+Proof. apply word_13_congr.
+ - apply word_10_inputs; assumption.
+ - apply word_12_inputs; assumption.
+Qed.
+Lemma word_14_congr v w (H0 : word_13 v = word_13 w) : word_14 v = word_14 w.
+Proof. unfold word_14, closed_word_14. rewrite H0. reflexivity. Qed.
+Lemma word_14_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_14 v = word_14 w.
+Proof. apply word_14_congr.
+ - apply word_13_inputs; assumption.
+Qed.
+Lemma word_15_congr v w (H0 : word_9 v = word_9 w) (H1 : word_14 v = word_14 w) : word_15 v = word_15 w.
+Proof. unfold word_15, closed_word_15. rewrite H0 H1. reflexivity. Qed.
+Lemma word_15_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_15 v = word_15 w.
+Proof. apply word_15_congr.
+ - apply word_9_inputs; assumption.
+ - apply word_14_inputs; assumption.
+Qed.
+Lemma word_16_congr v w (H0 : word_1 v = word_1 w) : word_16 v = word_16 w.
+Proof. unfold word_16, closed_word_16. rewrite H0. reflexivity. Qed.
+Lemma word_16_inputs v w (I0 : v 0 1 = w 0 1) : word_16 v = word_16 w.
+Proof. apply word_16_congr.
+ - assumption.
+Qed.
+Lemma word_17_congr v w (H0 : word_16 v = word_16 w) : word_17 v = word_17 w.
+Proof. unfold word_17, closed_word_17. rewrite H0. reflexivity. Qed.
+Lemma word_17_inputs v w (I0 : v 0 1 = w 0 1) : word_17 v = word_17 w.
+Proof. apply word_17_congr.
+ - apply word_16_inputs; assumption.
+Qed.
+Lemma word_18_congr v w (H0 : word_15 v = word_15 w) : word_18 v = word_18 w.
+Proof. unfold word_18, closed_word_18. rewrite H0. reflexivity. Qed.
+Lemma word_18_inputs v w (I0 : v 0 2 = w 0 2) (I1 : v 0 3 = w 0 3) : word_18 v = word_18 w.
+Proof. apply word_18_congr.
+ - apply word_15_inputs; assumption.
+Qed.
