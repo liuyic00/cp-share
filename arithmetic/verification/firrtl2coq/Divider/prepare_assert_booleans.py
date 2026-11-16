@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from pathlib import Path
 import re
-P=Path(__file__).resolve().parent;raw=(P.parent/'Generated/Radix2Divider.v').read_text()
+P=Path(__file__).resolve().parent;raw=(P.parent/'Generated/Radix2Divider/Model.v').read_text()
 guards=[[(8,1),(18,1),(423,1)],[(8,1),(18,1),(428,1)],[(8,1),(18,0),(432,1)],[(8,1),(18,0),(439,1)],[(8,1),(18,0),(443,1)],[(445,1),(448,1),(451,1)],[(445,1),(453,1),(456,1)],[(445,1),(458,1),(463,1)],[(445,1),(458,1),(471,1)],[(475,1),(478,1)],[(475,1),(482,1)]]
 s=['''From Coq Require Import ZArith List.
 From mathcomp Require Import ssreflect ssrbool ssrfun ssrnat eqtype seq.
@@ -9,7 +9,7 @@ From simplssrlib Require Import Types SsrOrder Var.
 From nbits Require Import NBits.
 From firrtl Require Import Env_with_implicit_widths Firrtl_with_implicit_widths HiEnv_with_implicit_widths
  HiFirrtl_with_implicit_widths Semantics_with_implicit_widths Semantics_with_memory.
-From ArithmeticFIRRTL Require Import Radix2Divider.
+From Divider Require Import Model.
 From Divider Require Import Model Stable Frames Representation Typing AssertTransfer.
 Local Open Scope N_scope.
 Lemma one_bit_as_bool (bits : seq bool) (sized : size bits = 1%nat) : exists bit, bits = [::bit].

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from pathlib import Path
 import re
-P=Path(__file__).resolve().parent;raw=(P.parent/'Generated/Radix2Divider.v').read_text()
+P=Path(__file__).resolve().parent;raw=(P.parent/'Generated/Radix2Divider/Model.v').read_text()
 guards=[[(8,1),(18,1),(423,1)],[(8,1),(18,1),(428,1)],[(8,1),(18,0),(432,1)],[(8,1),(18,0),(439,1)],[(8,1),(18,0),(443,1)],[(445,1),(448,1),(451,1)],[(445,1),(453,1),(456,1)],[(445,1),(458,1),(463,1)],[(445,1),(458,1),(471,1)],[(475,1),(478,1)],[(475,1),(482,1)]]
 guardids=[416,416,421,421,421,433,435,440,440,444,444];predids=[414,418,419,430,431,6,8,438,443,399,445]
 leaf={18:'r1_ndivBy0Reg',445:'r10_nhistoryValid',475:'r13_nwasStalled'}

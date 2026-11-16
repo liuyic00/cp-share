@@ -27,7 +27,7 @@ Proof.
 Qed.
 Local Opaque circuit_initial_map_with_memory circuit_iter_count_with_memory circuit_formal_iterations.
 Lemma observe_cycle_matches previous inputs : Tool.generated_observe_cycle previous inputs = divider_observe_cycle (Some previous) inputs.
-Proof. unfold Tool.generated_observe_cycle, divider_observe_cycle. rewrite generated_modules_match generated_top_match. reflexivity. Qed.
+Proof. unfold Tool.generated_observe_cycle, divider_observe_cycle. reflexivity. Qed.
 Local Opaque Tool.generated_run Tool.generated_observe_cycle divider_observe_cycle.
 Lemma generated_observation_reference memory inputs k states
  (observed:Tool.generated_observe memory inputs k = Some states)
@@ -50,7 +50,20 @@ Proof.
  (runtime_port_values _ _ _ DefinedCurrent) observed) as [env [Final Values]].
  exists env,ghost. split; assumption.
 Qed.
-Theorem divider_obligation_0 : Tool.obligation_0.
+(* Names for the external proof conclusions, not assumed lemmas. *)
+Definition obligation_0 : Prop := forall memory_init inputs (k : nat) states, generated_observe memory_init inputs k = Some states -> generated_legal_trace memory_init inputs k -> generated_assert_m0_0_all states.
+Definition obligation_1 : Prop := forall memory_init inputs (k : nat) states, generated_observe memory_init inputs k = Some states -> generated_legal_trace memory_init inputs k -> generated_assert_m0_1_all states.
+Definition obligation_2 : Prop := forall memory_init inputs (k : nat) states, generated_observe memory_init inputs k = Some states -> generated_legal_trace memory_init inputs k -> generated_assert_m0_2_all states.
+Definition obligation_3 : Prop := forall memory_init inputs (k : nat) states, generated_observe memory_init inputs k = Some states -> generated_legal_trace memory_init inputs k -> generated_assert_m0_3_all states.
+Definition obligation_4 : Prop := forall memory_init inputs (k : nat) states, generated_observe memory_init inputs k = Some states -> generated_legal_trace memory_init inputs k -> generated_assert_m0_4_all states.
+Definition obligation_5 : Prop := forall memory_init inputs (k : nat) states, generated_observe memory_init inputs k = Some states -> generated_legal_trace memory_init inputs k -> generated_assert_m0_5_all states.
+Definition obligation_6 : Prop := forall memory_init inputs (k : nat) states, generated_observe memory_init inputs k = Some states -> generated_legal_trace memory_init inputs k -> generated_assert_m0_6_all states.
+Definition obligation_7 : Prop := forall memory_init inputs (k : nat) states, generated_observe memory_init inputs k = Some states -> generated_legal_trace memory_init inputs k -> generated_assert_m0_7_all states.
+Definition obligation_8 : Prop := forall memory_init inputs (k : nat) states, generated_observe memory_init inputs k = Some states -> generated_legal_trace memory_init inputs k -> generated_assert_m0_8_all states.
+Definition obligation_9 : Prop := forall memory_init inputs (k : nat) states, generated_observe memory_init inputs k = Some states -> generated_legal_trace memory_init inputs k -> generated_assert_m0_9_all states.
+Definition obligation_10 : Prop := forall memory_init inputs (k : nat) states, generated_observe memory_init inputs k = Some states -> generated_legal_trace memory_init inputs k -> generated_assert_m0_10_all states.
+
+Theorem divider_obligation_0 : obligation_0.
 Proof.
  intros memory inputs k states observed legal.
  destruct (generated_observation_reference memory inputs k states observed legal) as [env [ghost [Found Values]]].
@@ -60,7 +73,7 @@ Proof.
  apply (proj2 (assertion_0_local_clock _ _)).
  apply reference_assertion_0. apply reference_trace_asserts.
 Qed.
-Theorem divider_obligation_1 : Tool.obligation_1.
+Theorem divider_obligation_1 : obligation_1.
 Proof.
  intros memory inputs k states observed legal.
  destruct (generated_observation_reference memory inputs k states observed legal) as [env [ghost [Found Values]]].
@@ -70,7 +83,7 @@ Proof.
  apply (proj2 (assertion_1_local_clock _ _)).
  apply reference_assertion_1. apply reference_trace_asserts.
 Qed.
-Theorem divider_obligation_2 : Tool.obligation_2.
+Theorem divider_obligation_2 : obligation_2.
 Proof.
  intros memory inputs k states observed legal.
  destruct (generated_observation_reference memory inputs k states observed legal) as [env [ghost [Found Values]]].
@@ -80,7 +93,7 @@ Proof.
  apply (proj2 (assertion_2_local_clock _ _)).
  apply reference_assertion_2. apply reference_trace_asserts.
 Qed.
-Theorem divider_obligation_3 : Tool.obligation_3.
+Theorem divider_obligation_3 : obligation_3.
 Proof.
  intros memory inputs k states observed legal.
  destruct (generated_observation_reference memory inputs k states observed legal) as [env [ghost [Found Values]]].
@@ -90,7 +103,7 @@ Proof.
  apply (proj2 (assertion_3_local_clock _ _)).
  apply reference_assertion_3. apply reference_trace_asserts.
 Qed.
-Theorem divider_obligation_4 : Tool.obligation_4.
+Theorem divider_obligation_4 : obligation_4.
 Proof.
  intros memory inputs k states observed legal.
  destruct (generated_observation_reference memory inputs k states observed legal) as [env [ghost [Found Values]]].
@@ -100,7 +113,7 @@ Proof.
  apply (proj2 (assertion_4_local_clock _ _)).
  apply reference_assertion_4. apply reference_trace_asserts.
 Qed.
-Theorem divider_obligation_5 : Tool.obligation_5.
+Theorem divider_obligation_5 : obligation_5.
 Proof.
  intros memory inputs k states observed legal.
  destruct (generated_observation_reference memory inputs k states observed legal) as [env [ghost [Found Values]]].
@@ -110,7 +123,7 @@ Proof.
  apply (proj2 (assertion_5_local_clock _ _)).
  apply reference_assertion_5. apply reference_trace_asserts.
 Qed.
-Theorem divider_obligation_6 : Tool.obligation_6.
+Theorem divider_obligation_6 : obligation_6.
 Proof.
  intros memory inputs k states observed legal.
  destruct (generated_observation_reference memory inputs k states observed legal) as [env [ghost [Found Values]]].
@@ -120,7 +133,7 @@ Proof.
  apply (proj2 (assertion_6_local_clock _ _)).
  apply reference_assertion_6. apply reference_trace_asserts.
 Qed.
-Theorem divider_obligation_7 : Tool.obligation_7.
+Theorem divider_obligation_7 : obligation_7.
 Proof.
  intros memory inputs k states observed legal.
  destruct (generated_observation_reference memory inputs k states observed legal) as [env [ghost [Found Values]]].
@@ -130,7 +143,7 @@ Proof.
  apply (proj2 (assertion_7_local_clock _ _)).
  apply reference_assertion_7. apply reference_trace_asserts.
 Qed.
-Theorem divider_obligation_8 : Tool.obligation_8.
+Theorem divider_obligation_8 : obligation_8.
 Proof.
  intros memory inputs k states observed legal.
  destruct (generated_observation_reference memory inputs k states observed legal) as [env [ghost [Found Values]]].
@@ -140,7 +153,7 @@ Proof.
  apply (proj2 (assertion_8_local_clock _ _)).
  apply reference_assertion_8. apply reference_trace_asserts.
 Qed.
-Theorem divider_obligation_9 : Tool.obligation_9.
+Theorem divider_obligation_9 : obligation_9.
 Proof.
  intros memory inputs k states observed legal.
  destruct (generated_observation_reference memory inputs k states observed legal) as [env [ghost [Found Values]]].
@@ -150,7 +163,7 @@ Proof.
  apply (proj2 (assertion_9_local_clock _ _)).
  apply reference_assertion_9. apply reference_trace_asserts.
 Qed.
-Theorem divider_obligation_10 : Tool.obligation_10.
+Theorem divider_obligation_10 : obligation_10.
 Proof.
  intros memory inputs k states observed legal.
  destruct (generated_observation_reference memory inputs k states observed legal) as [env [ghost [Found Values]]].

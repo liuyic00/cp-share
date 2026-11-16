@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Extract unchanged module AST declarations for the compressor proof helpers."""
+"""Extract the unchanged model and property definitions for the compressor proofs."""
 import argparse
+import re
 from pathlib import Path
 import subprocess
 import tempfile
@@ -19,9 +20,10 @@ with tempfile.TemporaryDirectory() as temp:
     marker = '(* Generated verification properties. *)'
     if marker not in text:
         raise SystemExit('Unexpected generator output: verification boundary missing')
-    # This preserves every generated AST definition and removes only the
-    # unrelated automatically admitted verification obligations.
-    model = text.split(marker, 1)[0]
+    # Preserve the full prefix verbatim; final lemmas are emitted by the central generator.
+    model = re.split(r'(?=^Lemma generated_assert_\d+ :)', text, flags=re.M)[0]
     if 'Definition generated_top := 3.' not in model:
         raise SystemExit('Unexpected top module; review this helper before regenerating')
-    (HERE / 'Model.v').write_text(model)
+    target = HERE.parent / 'Generated/ArrayMulDataModule8/Model.v'
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(model)

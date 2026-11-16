@@ -17,11 +17,14 @@ def main():
     parser.add_argument('--jobs', type=int, default=1)
     parser.add_argument('--force', action='store_true', help='Recompile the entire proof dependency closure')
     parser.add_argument('--firrtl', type=Path, default=ROOT / 'arithmetic/artifacts/chisel3/firrtl/ArrayMulDataModule8.lo.fir')
+    parser.add_argument('--compile-only', action='store_true', help='Compile the final generated lemmas without an additional coqchk pass')
     args = parser.parse_args()
-    manifest = json.loads((BASE / 'Generated/manifest.json').read_text())['ArrayMulDataModule8']
+    manifest = json.loads((BASE / 'Generated/ArrayMulDataModule8/manifest.json').read_text())['ArrayMulDataModule8']
     firrtl = args.firrtl.resolve(strict=True)
-    model = BASE / 'Generated/ArrayMulDataModule8.v'
-    for path, key in [(firrtl, 'firrtl_sha256'), (model, 'model_sha256')]:
+    lemmas = BASE / 'Generated/ArrayMulDataModule8/ArrayMulDataModule8.v'
+    model = BASE / 'Generated/ArrayMulDataModule8/Model.v'
+    for path, key in [(firrtl, 'firrtl_sha256'), (model, 'model_sha256'),
+                      (lemmas, 'lemmas_sha256')]:
         if hashlib.sha256(path.read_bytes()).hexdigest() != manifest[key]:
             raise SystemExit('Generation manifest mismatch: ' + str(path))
     if manifest['obligations'] != 5:
@@ -32,19 +35,25 @@ def main():
         'nbits': ROOT / 'tool/firrtl2coq/lib/nbits',
         'firrtl': ROOT / 'tool/firrtl2coq/src',
         'ArithmeticCommon': BASE / 'Common',
-        'SmallMultiplier': BASE / 'SmallMultiplier',
-        'ArithmeticFIRRTL': BASE / 'Generated',
+        'SmallMultiplier': [BASE / 'SmallMultiplier', BASE / 'Generated/ArrayMulDataModule8'],
     }
+    mappings = {name: paths if isinstance(paths, list) else [paths]
+                for name, paths in mappings.items()}
     flags = []
-    for name, path in mappings.items():
-        flags += ['-R' if name == 'firrtl' else '-Q', str(path), name]
+    for name, paths in mappings.items():
+        for path in paths:
+            flags += ['-R' if name == 'firrtl' else '-Q', str(path), name]
     sources = set()
     def visit(namespace, name):
-        path = mappings[namespace] / (name.replace('.', '/') + '.v')
+        candidates = [root / (name.replace('.', '/') + '.v') for root in mappings[namespace]]
+        existing = [path for path in candidates if path.is_file()]
+        if len(existing) != 1:
+            raise SystemExit('Expected exactly one source for ' + namespace + '.' + name +
+                             ': ' + ', '.join(map(str, candidates)) +
+                             '; see firrtl2coq/README.md for generation commands.')
+        path = existing[0]
         if path in sources:
             return
-        if not path.exists():
-            raise SystemExit('Missing source: ' + str(path) + '; see firrtl2coq/README.md for generation commands.')
         sources.add(path)
         text = re.sub(r'\(\*.*?\*\)', '', path.read_text(), flags=re.S)
         if re.search(r'\b(Admitted|admit|Axiom|Parameter)\b', text):
@@ -53,23 +62,24 @@ def main():
             if prefix in mappings and prefix not in {'simplssrlib', 'nbits', 'firrtl'}:
                 for imported in imports.split():
                     visit(prefix, imported)
-    visit('SmallMultiplier', 'Proof')
+    visit('SmallMultiplier', 'ArrayMulDataModule8')
     build = ROOT / 'arithmetic/build/firrtl2coq-multiplier-proof'
     build.mkdir(parents=True, exist_ok=True)
     (build / 'result.json').unlink(missing_ok=True)
     subprocess.run(opam + ['coq_makefile', *flags, *map(str, sorted(sources)), '-o', 'Makefile'], cwd=build, check=True)
     subprocess.run(opam + ['make', '-f', 'Makefile', '-j' + str(args.jobs)] + (['-B'] if args.force else []) + ['all'], cwd=build, check=True)
-    soft, hard = resource.getrlimit(resource.RLIMIT_STACK)
-    resource.setrlimit(resource.RLIMIT_STACK, (min(64 * 1024 * 1024, hard) if hard != resource.RLIM_INFINITY else 64 * 1024 * 1024, hard))
-    subprocess.run(opam + ['coqchk', '-silent', *flags, 'SmallMultiplier.Proof'], cwd=ROOT, check=True)
-    result = {'target': 'SmallMultiplier.Proof', 'obligations': 5, 'coqchk': 'passed',
+    if not args.compile_only:
+        soft, hard = resource.getrlimit(resource.RLIMIT_STACK)
+        resource.setrlimit(resource.RLIMIT_STACK, (min(64 * 1024 * 1024, hard) if hard != resource.RLIM_INFINITY else 64 * 1024 * 1024, hard))
+        subprocess.run(opam + ['coqchk', '-silent', *flags, 'SmallMultiplier.ArrayMulDataModule8'], cwd=ROOT, check=True)
+    result = {'target': 'SmallMultiplier.ArrayMulDataModule8', 'obligations': 5, 'coqc': 'passed', 'coqchk': 'skipped' if args.compile_only else 'passed',
               'upstream_axioms': ['ftype_eqn_eq', 'ffield_eqn_eq'],
               'firrtl_sha256': manifest['firrtl_sha256'], 'model_sha256': manifest['model_sha256'],
               'sources_sha256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(sources)},
               'tool_base': subprocess.check_output(['git', '-C', str(ROOT / 'tool/firrtl2coq'), 'rev-parse', 'HEAD'], text=True).strip(),
               'tool_sources_sha256': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((ROOT / 'tool/firrtl2coq/src').rglob('*.v'))}}
     (build / 'result.json').write_text(json.dumps(result, indent=2) + '\n')
-    print('All 5 exact generated multiplier obligations built and checked by coqchk.')
+    print('All 5 generated multiplier lemmas compiled.' + ('' if args.compile_only else ' coqchk passed.'))
 
 if __name__ == '__main__':
     main()

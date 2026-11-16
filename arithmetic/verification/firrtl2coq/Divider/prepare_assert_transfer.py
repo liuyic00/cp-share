@@ -2,21 +2,17 @@
 """Transfer the actual generated assertion formulas using checked scalar lookup equality."""
 from pathlib import Path
 import re
-P=Path(__file__).resolve().parent;raw=(P.parent/'Generated/Radix2Divider.v').read_text()
+P=Path(__file__).resolve().parent;raw=(P.parent/'Generated/Radix2Divider/Model.v').read_text()
 s=['''From Coq Require Import ZArith List.
 From mathcomp Require Import ssreflect ssrbool ssrfun ssrnat eqtype seq.
 From simplssrlib Require Import Types SsrOrder Var.
 From firrtl Require Import Env_with_implicit_widths Firrtl_with_implicit_widths HiEnv_with_implicit_widths
  HiFirrtl_with_implicit_widths Semantics_with_implicit_widths Semantics_with_memory.
 From ArithmeticCommon Require Import ScalarEvaluation ScalarExtensionality.
-From ArithmeticFIRRTL Require Import Radix2Divider.
+From Divider Require Import Model.
 From Divider Require Import Model Stable SingleModule NodeProgress.
-Module Tool := ArithmeticFIRRTL.Radix2Divider.
+Module Tool := Divider.Model.
 Local Open Scope N_scope.
-Lemma generated_modules_match : Tool.generated_modules = Model.generated_modules.
-Proof. reflexivity. Qed.
-Lemma generated_top_match : Tool.generated_top = Model.generated_top.
-Proof. reflexivity. Qed.
 Lemma generated_expr_transfer expr env v
  (pure : scalar_exprb expr)
  (dependencies : forall dep, List.In dep (scalar_refs expr) -> divider_domain dep)
@@ -50,7 +46,7 @@ Qed.
 Lemma assertion_{id}_instance states env (found : SVM.find [::] states = Some env) :
  Tool.generated_assert_m0_{id}_all states <-> Tool.generated_assert_m0_{id}_local env.
 Proof.
- unfold Tool.generated_assert_m0_{id}_all. rewrite generated_modules_match generated_top_match divider_instances_computed.
+ unfold Tool.generated_assert_m0_{id}_all. rewrite divider_instances_computed.
  change (((false = true) \\/ match SVM.find [::] states with Some sem => Tool.generated_assert_m0_{id}_local sem | None => False end) /\\ True <-> Tool.generated_assert_m0_{id}_local env).
  rewrite found. split; [intros [[bad|H] _]; [discriminate|exact H]|intro H; split; [right; exact H|exact I]].
 Qed.

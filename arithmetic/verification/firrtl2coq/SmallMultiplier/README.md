@@ -1,14 +1,15 @@
 # XiangShan 8-bit multiplier: original firrtl2coq assertions
 
 `Proof.v` proves all five exact propositions in the generated
-`ArithmeticFIRRTL.ArrayMulDataModule8` file: one assertion for each of the three
+`SmallMultiplier.ArrayMulDataModule8` file: one assertion for each of the three
 compressor module types (at every instance), and the two top-level assertions.
 All five theorems and `multiplier_all_obligations` have compiled with Coq 8.16.0.
-The full forced rebuild of all 140 local proof dependency files and independent
-`coqchk` run have passed. The successful check is recorded in
-`arithmetic/build/firrtl2coq-multiplier-proof/result.json`; all recorded proof and
-tool source hashes, the retained FIRRTL input, and the generated model were
-verified against the current files.
+The full dependency closure of 140 files compiles under the current per-circuit
+layout. Before this directory reorganization, a forced rebuild and independent
+`coqchk` run had both passed. The latest layout validation compiled all
+necessary dependencies but did not repeat `coqchk`. A complete checker run
+writes `arithmetic/build/firrtl2coq-multiplier-proof/result.json` only after
+independent checking succeeds.
 
 The proof quantifies arbitrary symbolic power-on register values, executes the
 original interpreter's reset-high cycle, and covers every subsequent finite
@@ -41,22 +42,18 @@ python3 arithmetic/scripts/check_firrtl2coq_multiplier.py --jobs 2 --force
 The retained 8-bit Low FIRRTL is available in this `ai-dev` worktree;
 the commands above use its default repository-local path.
 
-The model generator preserves the tool's exact assertion propositions as
-`Definition obligation_i : Prop`, rather than importing its admitted lemmas.
-Its `proved: false` manifest field describes generation alone. Proof completion
-is recorded separately by the checker. `Model.v` is checked definitionally
-against this exact generated model in `GeneratedObservation.v`.
+Tool-generated Coq lives under `../Generated/ArrayMulDataModule8/`:
+`Model.v` is the verbatim model/properties prefix, and `ArrayMulDataModule8.v`
+retains the original five lemma statements, replacing each `Admitted.` with
+`Proof. exact SmallMultiplier.Proof.multiplier_obligation_i. Qed.`.
+Both Coq files are reviewable sources; only the generation manifest is ignored.
+The complex proofs remain here and import only `Model`, avoiding circular dependencies.
 
-The checker verifies input/model hashes, audits the local proof dependency
-closure for added axioms or admitted proofs, builds all 140 source files,
-and runs `coqchk SmallMultiplier.Proof`. `--force` recompiles the full local
-closure; omit it for incremental checks. A successful run writes
-`arithmetic/build/firrtl2coq-multiplier-proof/result.json` with the five checked
-obligations, proof-source hashes, tool-source hashes, and tool base commit.
-`.vo`, `.glob`, generated obligation models, logs, and result files are ignored
-build products. The proof `.v` sources are retained and sufficient to rebuild
-without their previous compiled files. The original hi/lo FIRRTL inputs remain
-retained.
+The checker audits the dependency closure for admitted proofs and compiles the final
+`SmallMultiplier.ArrayMulDataModule8` module. Use `--compile-only` to skip an additional
+`coqchk`; otherwise it independently checks that final module too. `--force` recompiles
+the full closure. The result records compilation and independent checking separately.
+Generation (`proved: false` in the manifest) does not claim that these proofs compile.
 
 ## Proof structure
 

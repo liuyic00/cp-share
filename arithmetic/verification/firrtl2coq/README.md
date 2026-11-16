@@ -2,9 +2,40 @@
 
 当前工具基于上游 `csj` 的 `ced58a8125da4b044ca6c4b75b528040af88cf80`，当前工具引用包含本次修复。仍执行原始分层 FIRRTL AST 和原始位向量、周期解释器。
 
-除法器的 [Divider/Proof.v](Divider/Proof.v) 已构造生成文件 `ArithmeticFIRRTL.Radix2Divider.obligation_0` 至 `obligation_10` 的证明。覆盖任意初始寄存器、真实 reset 高电平的一拍，以及复位后任意步；结论和前提均使用生成器给出的合法执行定义。通过已证明的逐拍对应关系复用已有数学不变量，没有假设模型等价。8 位乘法器的分层组合收敛、完整周期寄存器提交、任意初始寄存器与真实复位、复位后任意步流水线不变量，以及全部局部 assert 已经由 Coq 检查；`SmallMultiplier/Proof.v` 的五个原始生成目标及总定理已通过 `coqc`，依赖审计仅显示上游两个类型相等性公理。140 个证明依赖文件已全部强制重编译成功，独立 `coqchk` 已通过。检查结果记录在 `arithmetic/build/firrtl2coq-multiplier-proof/result.json`，其中证明源文件、工具源文件及输入和生成模型的哈希已核对一致。
+除法器的 [Divider/Proof.v](Divider/Proof.v) 已构造`Divider.Proof.obligation_0` 至 `obligation_10`（外部证明内部的命题别名） 的证明。覆盖任意初始寄存器、真实 reset 高电平的一拍，以及复位后任意步；结论和前提均使用生成器给出的合法执行定义。通过已证明的逐拍对应关系复用已有数学不变量，没有假设模型等价。8 位乘法器的分层组合收敛、完整周期寄存器提交、任意初始寄存器与真实复位、复位后任意步流水线不变量，以及全部局部 assert 已经由 Coq 检查；`SmallMultiplier/Proof.v` 的五个原始生成目标及总定理已通过 `coqc`，依赖审计仅显示上游两个类型相等性公理。目录整理前已完成 140 个依赖文件的强制重编译和独立 `coqchk`。2026-11-16 按电路名拆分目录后，两个目标的全部依赖均通过 `coqc`；除法器的独立 `coqchk` 再次通过，乘法器本轮仅完成编译，没有重复独立检查。
 
 证明依赖上游 `ftype_eqn_eq`、`ffield_eqn_eq` 两个类型相等性公理；未使用上游未证明的表达式类型正确性定理，也未新增公理或 `Admitted`。工具修复与电路证明分别保存在工具仓库和本仓库中。
+
+## 模型与证明的目录边界
+
+`firrtl2coq` 生成的 Coq 按 FIRRTL 的真实 circuit/top 名称放在 `Generated/`：
+
+| 路径 | 内容 |
+|---|---|
+| `Generated/Radix2Divider/Model.v` | 除法器原始输出的完整模型和性质定义，逐字保留 Lemma 前缀 |
+| `Generated/Radix2Divider/Radix2Divider.v` | 11 个原始 `generated_assert_i` Lemma；每个只用一行 `exact` 引用外部证明 |
+| `Generated/ArrayMulDataModule8/Model.v` | 8 位乘法器原始输出的完整模型和性质定义，逐字保留 Lemma 前缀 |
+| `Generated/ArrayMulDataModule8/ArrayMulDataModule8.v` | 5 个原始 `generated_assert_i` Lemma；每个只用一行 `exact` 引用外部证明 |
+| `Common/`、`Divider/`、`SmallMultiplier/` | 证明库、桥接、证书和最终定理；包括手写与 Python 生成的证明 |
+
+每个电路的两份 Coq 文件都保留为可审核源码；仅 `manifest.json` 保持忽略。
+`generate_firrtl2coq_models.py` 不修改 firrtl2coq 本身：它调用真实工具，将第一个
+`Lemma generated_assert_0` 之前的全部内容逐字写入 `Model.v`，将原始 Lemma
+声明逐字放入电路同名文件。后者只补充导入和 notation scope，并将每个 `Admitted.`
+替换为 `Proof. exact Divider.Proof.divider_obligation_0. Qed.` 这样的外部证明调用。
+实际复杂证明仍位于 `Divider/Proof.v` 和 `SmallMultiplier/Proof.v`；它们只依赖
+`Model.v`，不导入最终 Lemma 文件，避免循环和引用未经证明的生成目标。
+外部证明内部的 `obligation_i` 是便于复用的命题别名，不是生成器的证明占位。
+最终检查目标是包含所有原始 Lemma 的电路同名文件，而非这些别名的定义。
+
+`--check` 重新调用工具并逐字比较模型、Lemma 和 manifest；命题改变或缺少证明调用
+都会产生差异。生成本身不代表证明通过，必须编译最终 Lemma 文件。
+相同内容不会重写文件。`prepare.py` 等证书脚本也保留完整模型前缀。
+
+Coq 逻辑模块为 `Divider.Model` / `Divider.Radix2Divider` 和
+`SmallMultiplier.Model` / `SmallMultiplier.ArrayMulDataModule8`。
+检查脚本将各电路生成目录和对应证明目录映射到同一命名空间，并拒绝重复的同名源文件。
+生成模型目录优先于证明目录中的旧编译缓存。`Archive/` 保存历史原文，不参与当前构建。
 
 复现（仓库根目录，已安装 `firrtl2coq` opam switch）：
 
@@ -13,13 +44,19 @@
 (cd tool/firrtl2coq && opam exec --switch=firrtl2coq -- coq_makefile -f _CoqProject -o Makefile && opam exec --switch=firrtl2coq -- make -j1)
 (cd tool/firrtl2coq/src/ocaml && opam exec --switch=firrtl2coq -- dune build && opam exec --switch=firrtl2coq -- dune runtest)
 python3 arithmetic/scripts/generate_firrtl2coq_models.py
+python3 arithmetic/scripts/generate_firrtl2coq_models.py --check
 # 旧数学模型若被忽略/删除，先恢复它：
 python3 arithmetic/scripts/regenerate.py --backend rocq
-python3 arithmetic/scripts/check_firrtl2coq_divider.py
-python3 arithmetic/scripts/check_firrtl2coq_multiplier.py --jobs 2 --force
+python3 arithmetic/scripts/check_firrtl2coq_divider.py --compile-only
+python3 arithmetic/scripts/check_firrtl2coq_multiplier.py --jobs 2 --compile-only
 ```
 
-`generate_firrtl2coq_models.py --firrtl-root /path/to/arithmetic/artifacts/chisel3/firrtl` 可指定输入目录。它将生成器留下的待证定理变成精确的 `Prop` 定义，生成操作本身不声称证明完成。两个检查脚本分别审计证明依赖、按依赖构建并执行 `coqchk`；通过后分别写入 `arithmetic/build/firrtl2coq-divider-proof/result.json` 和 `arithmetic/build/firrtl2coq-multiplier-proof/result.json`。`.vo`、生成模型、构建日志和该结果文件均不需要提交，hi/lo FIRRTL 输入保留。
+`generate_firrtl2coq_models.py --firrtl-root /path/to/arithmetic/artifacts/chisel3/firrtl` 可指定输入目录。
+两个检查脚本审计所有依赖中的 `Admitted`、`Axiom` 等并编译最终生成 Lemma；
+`--compile-only` 跳过额外的独立 `coqchk`，结果分别记录 `coqc: passed` 和 `coqchk: skipped`。
+省略该选项则继续检查最终 `Divider.Radix2Divider` / `SmallMultiplier.ArrayMulDataModule8`。
+结果写入各自的 `arithmetic/build/firrtl2coq-*-proof/result.json`。编译产物和结果无需提交。
+
 
 未进入最终证明依赖的探索文件及相关脚本保存在 [Archive/](Archive/README.md)，保留原文与原路径记录，不参与当前构建。
 

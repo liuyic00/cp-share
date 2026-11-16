@@ -4,7 +4,7 @@ From simplssrlib Require Import Types SsrOrder Var.
 From nbits Require Import NBits.
 From firrtl Require Import Env_with_implicit_widths Firrtl_with_implicit_widths HiEnv_with_implicit_widths
  HiFirrtl_with_implicit_widths Semantics_with_implicit_widths Semantics_with_memory.
-From ArithmeticFIRRTL Require Import Radix2Divider.
+From Divider Require Import Model.
 From Divider Require Import Model Stable Frames Representation Typing AssertTransfer.
 Local Open Scope N_scope.
 Lemma one_bit_as_bool (bits : seq bool) (sized : size bits = 1%nat) : exists bit, bits = [::bit].

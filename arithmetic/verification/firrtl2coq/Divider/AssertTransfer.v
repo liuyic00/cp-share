@@ -4,14 +4,10 @@ From simplssrlib Require Import Types SsrOrder Var.
 From firrtl Require Import Env_with_implicit_widths Firrtl_with_implicit_widths HiEnv_with_implicit_widths
  HiFirrtl_with_implicit_widths Semantics_with_implicit_widths Semantics_with_memory.
 From ArithmeticCommon Require Import ScalarEvaluation ScalarExtensionality.
-From ArithmeticFIRRTL Require Import Radix2Divider.
+From Divider Require Import Model.
 From Divider Require Import Model Stable SingleModule NodeProgress.
-Module Tool := ArithmeticFIRRTL.Radix2Divider.
+Module Tool := Divider.Model.
 Local Open Scope N_scope.
-Lemma generated_modules_match : Tool.generated_modules = Model.generated_modules.
-Proof. reflexivity. Qed.
-Lemma generated_top_match : Tool.generated_top = Model.generated_top.
-Proof. reflexivity. Qed.
 Lemma generated_expr_transfer expr env v
  (pure : scalar_exprb expr)
  (dependencies : forall dep, List.In dep (scalar_refs expr) -> divider_domain dep)
@@ -47,7 +43,7 @@ Qed.
 Lemma assertion_0_instance states env (found : SVM.find [::] states = Some env) :
  Tool.generated_assert_m0_0_all states <-> Tool.generated_assert_m0_0_local env.
 Proof.
- unfold Tool.generated_assert_m0_0_all. rewrite generated_modules_match generated_top_match divider_instances_computed.
+ unfold Tool.generated_assert_m0_0_all. rewrite divider_instances_computed.
  change (((false = true) \/ match SVM.find [::] states with Some sem => Tool.generated_assert_m0_0_local sem | None => False end) /\ True <-> Tool.generated_assert_m0_0_local env).
  rewrite found. split; [intros [[bad|H] _]; [discriminate|exact H]|intro H; split; [right; exact H|exact I]].
 Qed.
@@ -76,7 +72,7 @@ Qed.
 Lemma assertion_1_instance states env (found : SVM.find [::] states = Some env) :
  Tool.generated_assert_m0_1_all states <-> Tool.generated_assert_m0_1_local env.
 Proof.
- unfold Tool.generated_assert_m0_1_all. rewrite generated_modules_match generated_top_match divider_instances_computed.
+ unfold Tool.generated_assert_m0_1_all. rewrite divider_instances_computed.
  change (((false = true) \/ match SVM.find [::] states with Some sem => Tool.generated_assert_m0_1_local sem | None => False end) /\ True <-> Tool.generated_assert_m0_1_local env).
  rewrite found. split; [intros [[bad|H] _]; [discriminate|exact H]|intro H; split; [right; exact H|exact I]].
 Qed.
@@ -105,7 +101,7 @@ Qed.
 Lemma assertion_2_instance states env (found : SVM.find [::] states = Some env) :
  Tool.generated_assert_m0_2_all states <-> Tool.generated_assert_m0_2_local env.
 Proof.
- unfold Tool.generated_assert_m0_2_all. rewrite generated_modules_match generated_top_match divider_instances_computed.
+ unfold Tool.generated_assert_m0_2_all. rewrite divider_instances_computed.
  change (((false = true) \/ match SVM.find [::] states with Some sem => Tool.generated_assert_m0_2_local sem | None => False end) /\ True <-> Tool.generated_assert_m0_2_local env).
  rewrite found. split; [intros [[bad|H] _]; [discriminate|exact H]|intro H; split; [right; exact H|exact I]].
 Qed.
@@ -134,7 +130,7 @@ Qed.
 Lemma assertion_3_instance states env (found : SVM.find [::] states = Some env) :
  Tool.generated_assert_m0_3_all states <-> Tool.generated_assert_m0_3_local env.
 Proof.
- unfold Tool.generated_assert_m0_3_all. rewrite generated_modules_match generated_top_match divider_instances_computed.
+ unfold Tool.generated_assert_m0_3_all. rewrite divider_instances_computed.
  change (((false = true) \/ match SVM.find [::] states with Some sem => Tool.generated_assert_m0_3_local sem | None => False end) /\ True <-> Tool.generated_assert_m0_3_local env).
  rewrite found. split; [intros [[bad|H] _]; [discriminate|exact H]|intro H; split; [right; exact H|exact I]].
 Qed.
@@ -163,7 +159,7 @@ Qed.
 Lemma assertion_4_instance states env (found : SVM.find [::] states = Some env) :
  Tool.generated_assert_m0_4_all states <-> Tool.generated_assert_m0_4_local env.
 Proof.
- unfold Tool.generated_assert_m0_4_all. rewrite generated_modules_match generated_top_match divider_instances_computed.
+ unfold Tool.generated_assert_m0_4_all. rewrite divider_instances_computed.
  change (((false = true) \/ match SVM.find [::] states with Some sem => Tool.generated_assert_m0_4_local sem | None => False end) /\ True <-> Tool.generated_assert_m0_4_local env).
  rewrite found. split; [intros [[bad|H] _]; [discriminate|exact H]|intro H; split; [right; exact H|exact I]].
 Qed.
@@ -192,7 +188,7 @@ Qed.
 Lemma assertion_5_instance states env (found : SVM.find [::] states = Some env) :
  Tool.generated_assert_m0_5_all states <-> Tool.generated_assert_m0_5_local env.
 Proof.
- unfold Tool.generated_assert_m0_5_all. rewrite generated_modules_match generated_top_match divider_instances_computed.
+ unfold Tool.generated_assert_m0_5_all. rewrite divider_instances_computed.
  change (((false = true) \/ match SVM.find [::] states with Some sem => Tool.generated_assert_m0_5_local sem | None => False end) /\ True <-> Tool.generated_assert_m0_5_local env).
  rewrite found. split; [intros [[bad|H] _]; [discriminate|exact H]|intro H; split; [right; exact H|exact I]].
 Qed.
@@ -221,7 +217,7 @@ Qed.
 Lemma assertion_6_instance states env (found : SVM.find [::] states = Some env) :
  Tool.generated_assert_m0_6_all states <-> Tool.generated_assert_m0_6_local env.
 Proof.
- unfold Tool.generated_assert_m0_6_all. rewrite generated_modules_match generated_top_match divider_instances_computed.
+ unfold Tool.generated_assert_m0_6_all. rewrite divider_instances_computed.
  change (((false = true) \/ match SVM.find [::] states with Some sem => Tool.generated_assert_m0_6_local sem | None => False end) /\ True <-> Tool.generated_assert_m0_6_local env).
  rewrite found. split; [intros [[bad|H] _]; [discriminate|exact H]|intro H; split; [right; exact H|exact I]].
 Qed.
@@ -250,7 +246,7 @@ Qed.
 Lemma assertion_7_instance states env (found : SVM.find [::] states = Some env) :
  Tool.generated_assert_m0_7_all states <-> Tool.generated_assert_m0_7_local env.
 Proof.
- unfold Tool.generated_assert_m0_7_all. rewrite generated_modules_match generated_top_match divider_instances_computed.
+ unfold Tool.generated_assert_m0_7_all. rewrite divider_instances_computed.
  change (((false = true) \/ match SVM.find [::] states with Some sem => Tool.generated_assert_m0_7_local sem | None => False end) /\ True <-> Tool.generated_assert_m0_7_local env).
  rewrite found. split; [intros [[bad|H] _]; [discriminate|exact H]|intro H; split; [right; exact H|exact I]].
 Qed.
@@ -279,7 +275,7 @@ Qed.
 Lemma assertion_8_instance states env (found : SVM.find [::] states = Some env) :
  Tool.generated_assert_m0_8_all states <-> Tool.generated_assert_m0_8_local env.
 Proof.
- unfold Tool.generated_assert_m0_8_all. rewrite generated_modules_match generated_top_match divider_instances_computed.
+ unfold Tool.generated_assert_m0_8_all. rewrite divider_instances_computed.
  change (((false = true) \/ match SVM.find [::] states with Some sem => Tool.generated_assert_m0_8_local sem | None => False end) /\ True <-> Tool.generated_assert_m0_8_local env).
  rewrite found. split; [intros [[bad|H] _]; [discriminate|exact H]|intro H; split; [right; exact H|exact I]].
 Qed.
@@ -308,7 +304,7 @@ Qed.
 Lemma assertion_9_instance states env (found : SVM.find [::] states = Some env) :
  Tool.generated_assert_m0_9_all states <-> Tool.generated_assert_m0_9_local env.
 Proof.
- unfold Tool.generated_assert_m0_9_all. rewrite generated_modules_match generated_top_match divider_instances_computed.
+ unfold Tool.generated_assert_m0_9_all. rewrite divider_instances_computed.
  change (((false = true) \/ match SVM.find [::] states with Some sem => Tool.generated_assert_m0_9_local sem | None => False end) /\ True <-> Tool.generated_assert_m0_9_local env).
  rewrite found. split; [intros [[bad|H] _]; [discriminate|exact H]|intro H; split; [right; exact H|exact I]].
 Qed.
@@ -337,7 +333,7 @@ Qed.
 Lemma assertion_10_instance states env (found : SVM.find [::] states = Some env) :
  Tool.generated_assert_m0_10_all states <-> Tool.generated_assert_m0_10_local env.
 Proof.
- unfold Tool.generated_assert_m0_10_all. rewrite generated_modules_match generated_top_match divider_instances_computed.
+ unfold Tool.generated_assert_m0_10_all. rewrite divider_instances_computed.
  change (((false = true) \/ match SVM.find [::] states with Some sem => Tool.generated_assert_m0_10_local sem | None => False end) /\ True <-> Tool.generated_assert_m0_10_local env).
  rewrite found. split; [intros [[bad|H] _]; [discriminate|exact H]|intro H; split; [right; exact H|exact I]].
 Qed.

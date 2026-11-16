@@ -8,9 +8,9 @@ From simplssrlib Require Import Types SsrOrder Var.
 From nbits Require Import NBits.
 From firrtl Require Import Env_with_implicit_widths HiEnv_with_implicit_widths HiFirrtl_with_implicit_widths Semantics_with_implicit_widths Semantics_with_memory.
 From ArithmeticCommon Require Import HierarchyFacts.
-From ArithmeticFIRRTL Require ArrayMulDataModule8.
+From SmallMultiplier Require Model.
 From SmallMultiplier Require Import GlobalStable GlobalWidths GlobalContracts GlobalOutput GlobalProgressTypes PipelineInvariant ControlEquations.
-Module Tool:=ArithmeticFIRRTL.ArrayMulDataModule8.
+Module Tool:=SmallMultiplier.Model.
 Local Open Scope N_scope.
 '''
 s+='Local Opaque '+' '.join('global_word_'+str(i) for i in range(2262))+'.\n'

@@ -4,7 +4,7 @@ These certificates use the original `firrtl2coq` deep embedding and its bitvecto
 expression evaluator. They do not replace the FIRRTL execution model with the
 older arithmetic model, and do not assume equivalence of the two models.
 
-`build.sh` regenerates the local AST and certificate sources, then checks them
+`build.sh` regenerates the AST in `../Generated/Radix2Divider/Model.v` and local certificate sources, then checks them
 with the `firrtl2coq` opam switch. Prerequisites are the built tool Coq libraries,
 its extracted OCaml executable, the `ArithmeticCommon` helper libraries, and the
 older `verification/rocq/Generated/Radix2Divider.vo`. The source FIRRTL is the

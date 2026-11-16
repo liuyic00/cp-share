@@ -23,7 +23,9 @@ with tempfile.TemporaryDirectory(prefix='divider-certificates-',dir=ROOT/'build'
  model=raw.split('(* Generated verification properties. *)')[0]
  if 'Definition generated_top := 0.' not in model:
   raise SystemExit('Unexpected divider top; review generator schema')
- (HERE/'Model.v').write_text(model)
+ target = HERE.parent / 'Generated/Radix2Divider/Model.v'
+ target.parent.mkdir(parents=True, exist_ok=True)
+ target.write_text(re.split(r'(?=^Lemma generated_assert_\d+ :)', raw, flags=re.M)[0])
  if a.widths_log:
   width_text=a.widths_log.read_text()
  else:

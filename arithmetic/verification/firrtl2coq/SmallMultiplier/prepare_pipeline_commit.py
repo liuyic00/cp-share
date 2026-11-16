@@ -2,7 +2,7 @@
 """Generate the true-edge register bridge from original FIRRTL connections."""
 from pathlib import Path
 import json,re
-P=Path(__file__).resolve().parent;j=json.loads((P/'stable-nodes.json').read_text());idx=json.loads((P/'global-key-index.json').read_text());width={int(k):v[1] for k,v in j['root_types'].items()};regs=j['registers'];model=(P/'Model.v').read_text()
+P=Path(__file__).resolve().parent;j=json.loads((P/'stable-nodes.json').read_text());idx=json.loads((P/'global-key-index.json').read_text());width={int(k):v[1] for k,v in j['root_types'].items()};regs=j['registers'];model=(P.parent / 'Generated/ArrayMulDataModule8/Model.v').read_text()
 def form(start):
  d=0
  for i in range(start,len(model)):

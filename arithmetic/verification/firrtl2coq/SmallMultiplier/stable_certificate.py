@@ -8,7 +8,7 @@ H=Path(__file__).resolve().parent;A=H.parents[2]
 MID=globals().get('MODULE_ID',3)
 PREFIX=globals().get('OUTPUT_PREFIX','')
 WIDTHLOG=globals().get('WIDTH_LOG','small-widths.log')
-model=(H/'Model.v').read_text()
+model=(H.parent / 'Generated/ArrayMulDataModule8/Model.v').read_text()
 def form(s,start):
  d=0
  for i in range(start,len(s)):

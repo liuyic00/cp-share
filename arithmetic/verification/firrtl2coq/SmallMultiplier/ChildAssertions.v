@@ -3,9 +3,9 @@ From mathcomp Require Import ssreflect ssrbool ssrnat eqtype seq.
 From simplssrlib Require Import Types SsrOrder Var.
 From firrtl Require Import Env_with_implicit_widths HiEnv_with_implicit_widths HiFirrtl_with_implicit_widths Semantics_with_implicit_widths Semantics_with_memory.
 From ArithmeticCommon Require Import HierarchyFacts.
-From ArithmeticFIRRTL Require ArrayMulDataModule8.
+From SmallMultiplier Require Model.
 From SmallMultiplier Require Import Model GlobalStable GlobalWidths GlobalInstances GlobalProgressTypes GlobalChildWeights.
-Module Tool:=ArithmeticFIRRTL.ArrayMulDataModule8.
+Module Tool:=SmallMultiplier.Model.
 Local Open Scope N_scope.
 Lemma assert_instances_from_members mid predicate states pairs
  (members:forall path,List.In (path,mid) pairs -> match SVM.find path states with Some env=>predicate env|None=>False end) :
