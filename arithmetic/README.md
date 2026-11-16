@@ -173,6 +173,25 @@ Scala FIRRTL 的位置注解含源码检出路径；跨绝对路径生成时可�
 
 当前已经完成的证明针对 Chisel 7 导出的模型，不声称新旧编译链已建立形式等价证明。
 
+## 香山除法器与 8 位乘法器 SystemVerilog
+
+`artifacts/chisel3/systemverilog/` 提交 `Radix2Divider.sv`（64 位）和
+`ArrayMulDataModule8.sv`（8 位），包括子模块和原有断言。
+它们由 `source-legacy` 固定的 Scala FIRRTL 1.6.0 官方 `sverilog` 后端直接生成，
+输入就是 firrtl2coq 证明使用的两个 `*.lo.fir` 快照；不修改 FIRRTL 版本头。
+目录中的 `manifest.json` 记录工具链、编译选项及输入/输出 SHA-256。
+
+```sh
+# 仓库根目录；沿用 source-legacy 的 Mill / Scala / JDK 版本
+python3 arithmetic/scripts/generate_firrtl_systemverilog.py
+python3 arithmetic/scripts/generate_firrtl_systemverilog.py --check
+verilator --lint-only --assert --top-module Radix2Divider arithmetic/artifacts/chisel3/systemverilog/Radix2Divider.sv
+verilator --lint-only --assert --top-module ArrayMulDataModule8 arithmetic/artifacts/chisel3/systemverilog/ArrayMulDataModule8.sv
+```
+
+`--check` 在临时目录重新编译并逐字比较两个 SV 和哈希记录，不改写已提交产物。
+SV 已通过 Verilator 语法/展开检查；Coq 证明仍针对 FIRRTL 模型，编译到 SV 属于可信编译链。
+
 ## 验证记录
 
 - 新增 8 位实例后，旧版 26 个 High/Low FIRRTL 重生成与快照逐字一致。

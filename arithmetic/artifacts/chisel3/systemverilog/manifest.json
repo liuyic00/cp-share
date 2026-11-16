@@ -1,0 +1,29 @@
+{
+  "compiler": "firrtl.stage.FirrtlMain",
+  "toolchain": {
+    "firrtl": "1.6.0",
+    "scala": "2.13.10",
+    "mill": "1.1.2",
+    "jdk": "temurin:17.0.15"
+  },
+  "options": [
+    "-X",
+    "sverilog"
+  ],
+  "instances": {
+    "Radix2Divider": {
+      "width": 64,
+      "firrtl": "artifacts/chisel3/firrtl/Radix2Divider.lo.fir",
+      "firrtl_sha256": "e647feb5f44df060220148bac82a0a0b34bdc9e57eb70970ba4aff7c7bd8f130",
+      "systemverilog": "Radix2Divider.sv",
+      "systemverilog_sha256": "7c1fc13d2eb271a2ac44da1e99433d2800061f224750fe27a11ed5743f2c4ba3"
+    },
+    "ArrayMulDataModule8": {
+      "width": 8,
+      "firrtl": "artifacts/chisel3/firrtl/ArrayMulDataModule8.lo.fir",
+      "firrtl_sha256": "f4f606bc388f0545d27c341766428d85232342d773c4c76ac6c1aa37bbd03869",
+      "systemverilog": "ArrayMulDataModule8.sv",
+      "systemverilog_sha256": "9b2842fad58960f4401a987689dee3f744ebb834033e4b39bf6cfe16f12bf003"
+    }
+  }
+}
