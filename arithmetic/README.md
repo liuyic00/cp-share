@@ -1,5 +1,7 @@
 # arithmetic：算术电路与证明
 
+本次香山除法器和小乘法器的 firrtl2coq 证明经历见 [证明经验总结](docs/firrtl2coq-proof-experience.md)。
+
 从私有 chisel-examples 仓库整理的 12 个具体算术电路实例，以及新增的 8 位香山乘法器实例。`source/` 是直接纳入 Git 的
 Chisel 7 工程及电路源码，不是子模块，不需要访问原仓库。来源与文件哈希固定在 `manifest.json`。
 
@@ -15,6 +17,7 @@ Chisel 7 工程及电路源码，不是子模块，不需要访问原仓库。�
 | `verification/lean-hierarchical/` | 分层 Lean 模型和证明 |
 | `verification/rocq/` | 基于整数模运算的 Coq 模型和证明 |
 | `verification/rocq-bits/` | bits 模型、Rocq 证明及与整数模型的 refinement |
+| `verification/firrtl2coq/` | Chisel 3 Low FIRRTL 的分层模型、原始断言 Lemma 和外部 Coq 证明 |
 | `scripts/` | 快照检查、重生成和证明构建入口 |
 
 每个证明工程区分 `Generated/` 和 `Proofs/`。路径固定；可重建产物仅保留哈希，首次拉取后按下文生成。
@@ -171,7 +174,7 @@ cd source-legacy
 `regenerate.py --backend all --check` 同时重生成旧版 FIRRTL 和新版四后端 HW/模型。
 Scala FIRRTL 的位置注解含源码检出路径；跨绝对路径生成时可能出现位置注解差异，检查会报告而非静默改写哈希。
 
-当前已经完成的证明针对 Chisel 7 导出的模型，不声称新旧编译链已建立形式等价证明。
+上面的四后端证明针对 Chisel 7 导出的模型。另有 [firrtl2coq 证明](verification/firrtl2coq/README.md) 针对 Chisel 3 的 64 位香山除法器和 8 位小乘法器 Low FIRRTL，16 个原始断言 Lemma 均已编译通过。其生成的模型/性质定义和最终 Lemma 分文件提交，复杂证明在独立文件中；本轮采用 `--compile-only`，未重复 `coqchk`。这些结果不声称新旧编译链已建立形式等价证明。
 
 ## 香山除法器与 8 位乘法器 SystemVerilog
 

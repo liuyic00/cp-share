@@ -3,13 +3,14 @@
 `Proof.v` proves all five exact propositions in the generated
 `SmallMultiplier.ArrayMulDataModule8` file: one assertion for each of the three
 compressor module types (at every instance), and the two top-level assertions.
-All five theorems and `multiplier_all_obligations` have compiled with Coq 8.16.0.
-The full dependency closure of 140 files compiles under the current per-circuit
-layout. Before this directory reorganization, a forced rebuild and independent
-`coqchk` run had both passed. The latest layout validation compiled all
-necessary dependencies but did not repeat `coqchk`. A complete checker run
-writes `arithmetic/build/firrtl2coq-multiplier-proof/result.json` only after
-independent checking succeeds.
+The five original `generated_assert_i` lemmas in that final generated module,
+as well as the external theorems and `multiplier_all_obligations`, have compiled
+with Coq 8.16.0. Before the model/lemma split, the historical 140-file dependency
+closure passed a forced rebuild and independent `coqchk`. The current split was
+validated with `--compile-only`: compilation passed, and independent checking
+was skipped. A successful selected workflow writes
+`arithmetic/build/firrtl2coq-multiplier-proof/result.json`; inspect its separate
+`coqc` and `coqchk` fields rather than treating file existence as a `coqchk` pass.
 
 The proof quantifies arbitrary symbolic power-on register values, executes the
 original interpreter's reset-high cycle, and covers every subsequent finite
@@ -36,10 +37,11 @@ root. Build the modified tool first if its sources changed:
 (cd tool/firrtl2coq && opam exec --switch=firrtl2coq -- coq_makefile -f _CoqProject -o Makefile && opam exec --switch=firrtl2coq -- make -j1)
 (cd tool/firrtl2coq/src/ocaml && opam exec --switch=firrtl2coq -- dune build && opam exec --switch=firrtl2coq -- dune runtest)
 python3 arithmetic/scripts/generate_firrtl2coq_models.py
-python3 arithmetic/scripts/check_firrtl2coq_multiplier.py --jobs 2 --force
+python3 arithmetic/scripts/generate_firrtl2coq_models.py --check
+python3 arithmetic/scripts/check_firrtl2coq_multiplier.py --jobs 2 --compile-only
 ```
 
-The retained 8-bit Low FIRRTL is available in this `ai-dev` worktree;
+The retained 8-bit Low FIRRTL is committed in the repository;
 the commands above use its default repository-local path.
 
 Tool-generated Coq lives under `../Generated/ArrayMulDataModule8/`:

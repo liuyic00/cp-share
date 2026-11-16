@@ -1,8 +1,20 @@
 # 当前 csj 修复与证明
 
+方法、语义边界、性能问题及代码规模见 [证明经验总结](../../docs/firrtl2coq-proof-experience.md)。
+
 当前工具基于上游 `csj` 的 `ced58a8125da4b044ca6c4b75b528040af88cf80`，当前工具引用包含本次修复。仍执行原始分层 FIRRTL AST 和原始位向量、周期解释器。
 
-除法器的 [Divider/Proof.v](Divider/Proof.v) 已构造`Divider.Proof.obligation_0` 至 `obligation_10`（外部证明内部的命题别名） 的证明。覆盖任意初始寄存器、真实 reset 高电平的一拍，以及复位后任意步；结论和前提均使用生成器给出的合法执行定义。通过已证明的逐拍对应关系复用已有数学不变量，没有假设模型等价。8 位乘法器的分层组合收敛、完整周期寄存器提交、任意初始寄存器与真实复位、复位后任意步流水线不变量，以及全部局部 assert 已经由 Coq 检查；`SmallMultiplier/Proof.v` 的五个原始生成目标及总定理已通过 `coqc`，依赖审计仅显示上游两个类型相等性公理。目录整理前已完成 140 个依赖文件的强制重编译和独立 `coqchk`。2026-11-16 按电路名拆分目录后，两个目标的全部依赖均通过 `coqc`；除法器的独立 `coqchk` 再次通过，乘法器本轮仅完成编译，没有重复独立检查。
+除法器的 [Divider/Proof.v](Divider/Proof.v) 提供 11 个外部证明，小乘法器的
+[SmallMultiplier/Proof.v](SmallMultiplier/Proof.v) 提供 5 个外部证明及总定理。
+最终生成的 `Divider.Radix2Divider` 和 `SmallMultiplier.ArrayMulDataModule8` 模块
+保留原始 `generated_assert_i` Lemma 声明，每个仅通过一行 `exact` 调用外部证明。
+`obligation_i` 现在只是外部证明文件内部的命题别名。
+证明覆盖任意初始寄存器、真实 reset 高电平的一拍及复位后任意步，使用生成器给出的合法执行前提；
+除法器通过已证明的逐拍对应关系复用数学不变量，小乘法器证明分层组合收敛、周期提交和流水线不变量。
+
+历史版本的两个完整证明均通过独立 `coqchk`，按电路名整理后除法器也再次通过独立检查。
+本轮拆分模型与 Lemma 后，两个最终生成模块的共 16 个 Lemma 及其依赖均通过 `coqc`；
+两个目标均使用 `--compile-only`，没有重复独立 `coqchk`。
 
 证明依赖上游 `ftype_eqn_eq`、`ffield_eqn_eq` 两个类型相等性公理；未使用上游未证明的表达式类型正确性定理，也未新增公理或 `Admitted`。工具修复与电路证明分别保存在工具仓库和本仓库中。
 
@@ -12,9 +24,9 @@
 
 | 路径 | 内容 |
 |---|---|
-| `Generated/Radix2Divider/Model.v` | 除法器原始输出的完整模型和性质定义，逐字保留 Lemma 前缀 |
+| `Generated/Radix2Divider/Model.v` | 除法器原始输出的完整模型和性质定义，逐字保留首个 Lemma 之前的全部内容 |
 | `Generated/Radix2Divider/Radix2Divider.v` | 11 个原始 `generated_assert_i` Lemma；每个只用一行 `exact` 引用外部证明 |
-| `Generated/ArrayMulDataModule8/Model.v` | 8 位乘法器原始输出的完整模型和性质定义，逐字保留 Lemma 前缀 |
+| `Generated/ArrayMulDataModule8/Model.v` | 8 位乘法器原始输出的完整模型和性质定义，逐字保留首个 Lemma 之前的全部内容 |
 | `Generated/ArrayMulDataModule8/ArrayMulDataModule8.v` | 5 个原始 `generated_assert_i` Lemma；每个只用一行 `exact` 引用外部证明 |
 | `Common/`、`Divider/`、`SmallMultiplier/` | 证明库、桥接、证书和最终定理；包括手写与 Python 生成的证明 |
 
